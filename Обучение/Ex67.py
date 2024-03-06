@@ -20,6 +20,7 @@ prev_x = first_x
 prev_y = first_y
 
 next = input('Введите следующую координату X (Enter для окончания ввода): ')
+
 while next != '':
     x = float(next)
     y = float(input('Введите следующую координату Y: '))
@@ -38,6 +39,7 @@ length = sqrt((first_x - x) ** 2 + (first_y - y) ** 2)
 P += length
 
 print('Периметр вашего многоугольника равен: ', P)
+
 
 
 
