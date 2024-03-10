@@ -26,7 +26,6 @@ count = 1
 to_lose = False
 to_win = False
 
-
 while count != 100:
     # Вывод числа (разные пробелы, чтобы игровая панель была ровная)
     if count < 10:
