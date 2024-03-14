@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>{{ flatpage.title }}</title>
-</head>
-<body>
-    <h2>{{ flatpage.title }}</h2>
-    <hr>
-    <i>{{ flatpage.content }}</i>
+{% extends 'flatpages/default.html' %}
 
-</body>
-</html>
+{% block title %}
+{{flatpages.title}}
+{% endblock title %}
+
+{% block content %}
+<p class="lead">Молодец, ты авторизованный пользователь!&nbsp;</p>
+{% endblock content %}
+{% block text %}
+<p class="lead">Ты видишь то, что не видят все остальные!&nbsp;</p>
+{% endblock text %}
+
