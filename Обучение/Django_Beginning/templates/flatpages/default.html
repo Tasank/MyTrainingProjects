@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
           type="text/css"/>
-    <link rel="icon" type="image/png" href="favicon.png">
     <!-- Core theme CSS (includes Bootstrap)-->
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
@@ -23,6 +22,7 @@
 <nav>
     <nav id="mainNav" class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top">
         <div class="container">
+            <a class="navbar-brand" href="#page-top">Мой сайт</a>
             <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded"
                     type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> Меню
@@ -40,8 +40,8 @@
         </div>
     </nav><!-- Masthead-->
     <header class="masthead bg-primary text-white text-center">
-        <div class="container d-flex align-items-center flex-column"><!-- Masthead Avatar Image--> <img
-                class="masthead-avatar mb-5" src="static/assets/img/avataaars.svg" alt="..."/> <!-- Masthead Heading-->
+        <div class="container d-flex align-items-center flex-column"><!-- Masthead Avatar Image-->
+            <img class="masthead-avatar mb-5" src="https://avatars.githubusercontent.com/u/156913761?v=4" alt="..."/> <!-- Masthead Heading-->
             <h1 class="masthead-heading text-uppercase mb-0">Приветствую!</h1>
             <!-- Icon Divider-->
             <div class="divider-custom divider-light">&nbsp;</div>
@@ -49,63 +49,75 @@
             <p class="masthead-subheading font-weight-light mb-0">Я практик БАО с востока. И я покажу вам свой сайт.</p>
         </div>
     </header><!-- Portfolio Section-->
-    <section id="portfolio" class="page-section portfolio">
-        <div class="container"><!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Портфолио</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom">&nbsp;</div>
-            <!-- Portfolio Grid Items-->
-            <div class="row justify-content-center"><!-- Portfolio Item 1-->
-                <div class="col-md-6 col-lg-4 mb-5">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
-                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            &nbsp;
-                        </div>
-                        <img class="img-fluid" src="assets/img/portfolio/cabin.png" alt="..."/></div>
+    <section class="page-section portfolio" id="portfolio">
+            <div class="container">
+                <!-- Portfolio Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Портфолио</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                    <div class="divider-custom-line"></div>
                 </div>
-                <!-- Portfolio Item 2-->
-                <div class="col-md-6 col-lg-4 mb-5">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
-                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            &nbsp;
+                <!-- Portfolio Grid Items-->
+                <div class="row justify-content-center">
+                    <!-- Portfolio Item 1-->
+                    <div class="col-md-6 col-lg-4 mb-5">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white"><svg class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"></path></svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                            </div>
+                            <img class="img-fluid" src="https://depo18.ru/wp-content/uploads/2023/03/z9wj7i06mw4.jpg" alt="...">
                         </div>
-                        <img class="img-fluid" src="assets/img/portfolio/cake.png" alt="..."/></div>
-                </div>
-                <!-- Portfolio Item 3-->
-                <div class="col-md-6 col-lg-4 mb-5">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
-                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            &nbsp;
+                    </div>
+                    <!-- Portfolio Item 2-->
+                    <div class="col-md-6 col-lg-4 mb-5">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white"><svg class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"></path></svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                            </div>
+                            <img class="img-fluid" src="https://avatars.mds.yandex.net/i?id=29e3cd1330203c73a9272be1c03d835875f0f52a-10876343-images-thumbs&n=13" alt="...">
                         </div>
-                        <img class="img-fluid" src="assets/img/portfolio/circus.png" alt="..."/></div>
-                </div>
-                <!-- Portfolio Item 4-->
-                <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
-                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            &nbsp;
+                    </div>
+                    <!-- Portfolio Item 3-->
+                    <div class="col-md-6 col-lg-4 mb-5">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white"><svg class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"></path></svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                            </div>
+                            <img class="img-fluid" src="https://s00.yaplakal.com/pics/pics_original/9/0/1/17348109.jpg" alt="...">
                         </div>
-                        <img class="img-fluid" src="assets/img/portfolio/game.png" alt="..."/></div>
-                </div>
-                <!-- Portfolio Item 5-->
-                <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
-                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            &nbsp;
+                    </div>
+                    <!-- Portfolio Item 4-->
+                    <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white"><svg class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"></path></svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                            </div>
+                            <img class="img-fluid" src="https://avatars.mds.yandex.net/i?id=ac75c5f0ebd34c38aa34d6e83614491c9c072319-12202401-images-thumbs&n=13" alt="...">
                         </div>
-                        <img class="img-fluid" src="assets/img/portfolio/safe.png" alt="..."/></div>
-                </div>
-                <!-- Portfolio Item 6-->
-                <div class="col-md-6 col-lg-4">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
-                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            &nbsp;
+                    </div>
+                    <!-- Portfolio Item 5-->
+                    <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white"><svg class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"></path></svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                            </div>
+                            <img class="img-fluid" src="https://avatars.mds.yandex.net/i?id=07b7484447307dcad8900976d89df5378b9f0356-10878212-images-thumbs&n=13" alt="...">
                         </div>
-                        <img class="img-fluid" src="assets/img/portfolio/submarine.png" alt="..."/></div>
+                    </div>
+                    <!-- Portfolio Item 6-->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white"><svg class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"></path></svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                            </div>
+                            <img class="img-fluid" src="https://avatars.mds.yandex.net/i?id=68e259ff3b41adffed7fada2ba6f9476a46caa58-5283999-images-thumbs&n=13" alt="...">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     <!-- About Section-->
     <section id="about" class="page-section bg-primary text-white mb-0">
         <div class="container"><!-- About Section Heading-->
@@ -115,19 +127,29 @@
             <!-- About Section Content-->
             <div class="row">
                 <div class="col-lg-4 ms-auto">
+                    {% block content %}
                     <p class="lead">Так как я восточный практик (начинающий Junior). Итак, для демонстрации своих навыков, а
                         также практики я создал этот сайт. Шаблон (страт) я конечно же скачал с открытого доступа, а не
                         сам долго писал (надо быть честным). Я изменил его под свои нужды.&nbsp;</p>
+                    {% endblock content %}
                 </div>
                 <div class="col-lg-4 me-auto">
+                    {% block text %}
                     <p class="lead">В дальнейшем я сделаю конечную версию сайта, где будут отображаться моё портфолио и мои
                         проекты на текущий момент.</p>
+                    {% endblock text %}
                 </div>
             </div>
             <!-- About Section Button-->
             <div class="text-center mt-4"><a class="btn btn-xl btn-outline-light"
-                                             href="https://startbootstrap.com/theme/freelancer/"> Платное
-                скачивание!XD </a></div>
+                                             href="https://github.com/Tasank"> Мой GitHub </a></div>
+            <div class="text-center mt-4"><a class="btn btn-xl btn-outline-light"
+                                             href="http://127.0.0.1:8000/text/"> Изменить текст? </a></div>
+            <div class="text-center mt-4"><a class="btn btn-xl btn-outline-light"
+                                             href="http://127.0.0.1:8000/user/"> Скрытое измерение </a></div>
+            <div class="text-center mt-4"><a class="btn btn-xl btn-outline-light"
+                                             href="http://127.0.0.1:8000/sky/"> Увидеть дополнительный контент. </a></div>
+
         </div>
     </section>
     <!-- Contact Section-->
@@ -225,157 +247,197 @@
         <div class="container"><small>Не копируй &copy; Это мой сайт 2024</small></div>
     </div>
     <!-- Portfolio Modals--> <!-- Portfolio Modal 1-->
-    <div id="portfolioModal1" class="portfolio-modal modal fade" tabindex="-1" aria-labelledby="portfolioModal1"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">&nbsp;</div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8"><!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Хижина
-                                    программиста</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">&nbsp;</div>
-                                <!-- Portfolio Modal - Image--> <img class="img-fluid rounded mb-5"
-                                                                     src="assets/img/portfolio/cabin.png" alt="..."/>
-                                <!-- Portfolio Modal - Text-->
-                                <p class="mb-4">Я богатый, бедный, успешный, умный, красивый и т.д.</p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal"> Закрыть Окно</button>
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Хибара программиста</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <!-- Portfolio Modal - Image-->
+                                    <img class="https://depo18.ru/wp-content/uploads/2023/03/z9wj7i06mw4.jpg" alt="...">
+                                    <!-- Portfolio Modal - Text-->
+                                    <p class="mb-4"></p>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <svg class="svg-inline--fa fa-xmark fa-fw" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"></path></svg><!-- <i class="fas fa-xmark fa-fw"></i> Font Awesome fontawesome.com -->
+                                        Close Window
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     <!-- Portfolio Modal 2-->
-    <div id="portfolioModal2" class="portfolio-modal modal fade" tabindex="-1" aria-labelledby="portfolioModal2"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">&nbsp;</div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8"><!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Капибаржа</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">&nbsp;</div>
-                                <!-- Portfolio Modal - Image--> <img class="img-fluid rounded mb-5"
-                                                                     src="assets/img/portfolio/cake.png" alt="..."/>
-                                <!-- Portfolio Modal - Text-->
-                                <p class="mb-4">Я богатый, бедный, успешный, умный, красивый и т.д.</p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">Закрыть Окно</button>
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Капибаржа</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <!-- Portfolio Modal - Image-->
+                                    <img class="img-fluid rounded mb-5" src="https://avatars.mds.yandex.net/i?id=29e3cd1330203c73a9272be1c03d835875f0f52a-10876343-images-thumbs&n=13" alt="...">
+                                    <!-- Portfolio Modal - Text-->
+                                    <p class="mb-4"></p>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <svg class="svg-inline--fa fa-xmark fa-fw" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"></path></svg><!-- <i class="fas fa-xmark fa-fw"></i> Font Awesome fontawesome.com -->
+                                        Close Window
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     <!-- Portfolio Modal 3-->
-    <div id="portfolioModal3" class="portfolio-modal modal fade" tabindex="-1" aria-labelledby="portfolioModal3"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">&nbsp;</div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8"><!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Хакерская
-                                    обстановка</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">&nbsp;</div>
-                                <!-- Portfolio Modal - Image--> <img class="img-fluid rounded mb-5"
-                                                                     src="assets/img/portfolio/circus.png" alt="..."/>
-                                <!-- Portfolio Modal - Text-->
-                                <p class="mb-4">Я богатый, бедный, успешный, умный, красивый и т.д.</p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">Закрыть Окно</button>
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal3" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Хакерская обстановка</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <!-- Portfolio Modal - Image-->
+                                    <img class="img-fluid rounded mb-5" src="https://s00.yaplakal.com/pics/pics_original/9/0/1/17348109.jpg" alt="...">
+                                    <!-- Portfolio Modal - Text-->
+                                    <p class="mb-4">пусто</p>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <svg class="svg-inline--fa fa-xmark fa-fw" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"></path></svg><!-- <i class="fas fa-xmark fa-fw"></i> Font Awesome fontawesome.com -->
+                                        Close Window
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     <!-- Portfolio Modal 4-->
-    <div id="portfolioModal4" class="portfolio-modal modal fade" tabindex="-1" aria-labelledby="portfolioModal4"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">&nbsp;</div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8"><!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Гейм-play</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">&nbsp;</div>
-                                <!-- Portfolio Modal - Image--> <img class="img-fluid rounded mb-5"
-                                                                     src="assets/img/portfolio/game.png" alt="..."/>
-                                <!-- Portfolio Modal - Text-->
-                                <p class="mb-4">Я богатый, бедный, успешный, умный, красивый и т.д.</p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">Закрыть Окно</button>
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal4" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Гейм-play</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <!-- Portfolio Modal - Image-->
+                                    <img class="img-fluid rounded mb-5" src="https://gas-kvas.com/uploads/posts/2023-02/1675393654_gas-kvas-com-p-geimpad-art-risunok-26.jpg" alt="...">
+                                    <!-- Portfolio Modal - Text-->
+                                    <p class="mb-4">Игры.</p>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <svg class="svg-inline--fa fa-xmark fa-fw" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"></path></svg><!-- <i class="fas fa-xmark fa-fw"></i> Font Awesome fontawesome.com -->
+                                        Close Window
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     <!-- Portfolio Modal 5-->
-    <div id="portfolioModal5" class="portfolio-modal modal fade" tabindex="-1" aria-labelledby="portfolioModal5"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">&nbsp;</div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8"><!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Сейф</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">&nbsp;</div>
-                                <!-- Portfolio Modal - Image--> <img class="img-fluid rounded mb-5"
-                                                                     src="assets/img/portfolio/safe.png" alt="..."/>
-                                <!-- Portfolio Modal - Text-->
-                                <p class="mb-4">Я богатый, бедный, успешный, умный, красивый и т.д.</p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">Закрыть Окно</button>
+    <<div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" aria-labelledby="portfolioModal5" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Сейф</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <!-- Portfolio Modal - Image-->
+                                    <img class="img-fluid rounded mb-5" src="https://avatars.mds.yandex.net/i?id=ac75c5f0ebd34c38aa34d6e83614491c9c072319-12202401-images-thumbs&n=13" alt="...">
+                                    <!-- Portfolio Modal - Text-->
+                                    <p class="mb-4">Сокрытые данные.</p>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <svg class="svg-inline--fa fa-xmark fa-fw" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"></path></svg><!-- <i class="fas fa-xmark fa-fw"></i> Font Awesome fontawesome.com -->
+                                        Close Window
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     <!-- Portfolio Modal 6-->
-    <div id="portfolioModal6" class="portfolio-modal modal fade" tabindex="-1" aria-labelledby="portfolioModal6"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">&nbsp;</div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8"><!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Гигачад</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">&nbsp;</div>
-                                <!-- Portfolio Modal - Image--> <img class="img-fluid rounded mb-5"
-                                                                     src="assets/img/portfolio/submarine.png"
-                                                                     alt="..."/> <!-- Portfolio Modal - Text-->
-                                <p class="mb-4">Я богатый, бедный, успешный, умный, красивый и т.д.</p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">Закрыть Окно</button>
+    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" aria-labelledby="portfolioModal6" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Гигачад</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <!-- Portfolio Modal - Image-->
+                                    <img class="img-fluid rounded mb-5" src="https://avatars.mds.yandex.net/i?id=68e259ff3b41adffed7fada2ba6f9476a46caa58-5283999-images-thumbs&n=13" alt="...">
+                                    <!-- Portfolio Modal - Text-->
+                                    <p class="mb-4">О разработчике</p>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <svg class="svg-inline--fa fa-xmark fa-fw" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"></path></svg><!-- <i class="fas fa-xmark fa-fw"></i> Font Awesome fontawesome.com -->
+                                        Close Window
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </nav>
 </body>
 </html>
