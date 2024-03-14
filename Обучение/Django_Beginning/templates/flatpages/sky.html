@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>{{ flatpage.title }}</title>
-</head>
-<body>
-    <h2>{{ flatpage.title }}</h2>
-    <hr>
-    <h3>О чём речь:</h3>
-    {{ flatpage.content }}
-    {{ flatpage.content }}
-</body>
-</html>
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+{{ flatpage.content }}
+{{ flatpage.content }}
+{% endblock content %}
+
+{% block text %}
+<p>Тут выведен дополнительный контент, другой статической странички</p>
+{% endblock text %}
