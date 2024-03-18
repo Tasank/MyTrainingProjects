@@ -6,9 +6,10 @@
 вызов функции и вывод на экран полученного результата.
 """
 from math import sqrt
-one_len = int(input('Введите длину первого катета: '))
-two_len = int(input('Введите длину второго катета: '))
+
 def hypotenuse():
+    one_len = int(input('Введите длину первого катета: '))
+    two_len = int(input('Введите длину второго катета: '))
     c = sqrt(one_len ** 2 + two_len ** 2)
     print('Длина гипотенузы равна: ', c)
 hypotenuse()
