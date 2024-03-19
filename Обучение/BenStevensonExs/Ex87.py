@@ -6,3 +6,17 @@
 В основной программе должны производиться запрос количества позиций в заказе у пользователя
 и отображаться на экране сумма доставки.
 """
+ask = int(input('Количество позиций в заказе: '))
+
+def price(quantity):
+    total = 10.95
+    if quantity == 1:
+        pass
+    elif quantity <= 0:
+        print('Ошибка!')
+        return
+    elif quantity > 1:
+        for i in range(quantity):
+            total += 2.95
+    print('Общая сумма доставки: %.2f $' % total)
+price(ask)
