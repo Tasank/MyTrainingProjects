@@ -8,13 +8,13 @@
 Ваша программа должна запускаться только в том случае, если она не импортирована в виде модуля в другой файл.
 """
 
-def slation(num):
+def slation(n):
     text = ''
     account = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eight', 'ninth', 'tenth', 'eleventh',
           'twelfth']
-    if num >= 12 or num < 0:
+    if n >= 12 or n < 0:
         return
-    text = account[num]
+    text = account[n]
     print(text)
 def main():
     for i in range(1, 12):
