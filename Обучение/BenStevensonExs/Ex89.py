@@ -7,3 +7,15 @@
 В основной программе запустите цикл по натуральным числам от 1 до 12 и выведите на экран соответствующие им числительные
 Ваша программа должна запускаться только в том случае, если она не импортирована в виде модуля в другой файл.
 """
+
+def slation(num):
+    text = ''
+    account = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eight', 'ninth', 'tenth', 'eleventh',
+          'twelfth']
+    if num >= 12 or num < 0:
+        return
+    text = account[num]
+    print(text)
+def main():
+    for i in range(1, 12):
+        slation(i)
