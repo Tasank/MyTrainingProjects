@@ -11,7 +11,7 @@ def generate():
     count = randrange(7, 11)
     key = ''
     for i in range(count):
-        element = chr(randrange(33,126))
+        element = chr(randrange(33, 126))
         key += element
     return key
 
