@@ -9,9 +9,10 @@
 """
 
 def system(original_system, base_system, number):
-    if base_system > 16 or base_system < 2:
+    if original_system > 16 or original_system < 2:
         return 'Ошибка'
-
+    # Используем метод волшебника 1) сначала переводим любую систему счисления в 10-ую
+    # 2) После 10-ую преобразовываем в новую систему
     result = back_convert_10(number, original_system)
     result = convert_10(result, base_system)
     return result
