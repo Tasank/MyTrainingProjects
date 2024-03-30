@@ -12,6 +12,7 @@ def conversion(unit, type_v):
     tablespoons = 0
     teaspoons = 0
 
+    # Основная логика функции, присваивание переменным значения
     if type_v == 'cup':
         cup = unit
 
