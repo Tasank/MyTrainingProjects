@@ -33,4 +33,5 @@ def main():
     year = int(input('Введите год: '))
     print('Дней в этом месяце = ', check_day(month, year))
 
-main()
+if __name__ == '__main__':
+    main()
