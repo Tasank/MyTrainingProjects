@@ -6,3 +6,21 @@
 числитель и знаменатель итоговой дроби должны быть 2 и 21. В основной программе нужно запросить у пользователя
 числитель и знаменатель исходной дроби, передать их в функцию и вывести на экран результат.
 """
+
+def common(n, de):
+    x = min(n, de)
+    while n % x != 0 or de % x != 0:
+        x -= 1
+    return x
+
+def fraction(numerator, denominator):
+    if numerator == 0:
+        return (0, 1)
+    y = common(numerator, denominator)
+    return numerator // y, denominator // y
+def ask():
+    numerator = int(input('Введите числитель дроби: '))
+    denominator = int(input('Введите знаменатель дроби: '))
+    print('Результат: ', fraction(numerator, denominator))
+
+ask()
