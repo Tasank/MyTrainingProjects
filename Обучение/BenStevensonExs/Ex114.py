@@ -21,9 +21,13 @@ def ask():
         else:
             positives.append(num)
         numbers = input('Введите число (Enter для выхода): ')
-    print('Отрицательные числа ->', negatives)
-    print('Нулевые числа ->', zeros)
-    print('Положительные числа ->', positives)
+
+    for i in negatives:
+        print('Отрицательные числа ->', i)
+    for i in zeros:
+        print('Нулевые числа ->', i)
+    for i in positives:
+        print('Положительные числа ->',i)
 
 ask()
 
