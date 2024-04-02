@@ -38,9 +38,9 @@ while count != 100:
     ask = input('|Определите число (Fizz/Buzz/Fizz Buzz/ Enter)                     | --> ')
 
     # Проверяем условие, если оно верно то игрок проиграл
-    if ask != 'Fizz' and count % 3 == 0:
+    if ask != 'Fizz' and count % 3 == 0 and count % 5 != 0:
         to_lose = True
-    elif ask != 'Buzz' and count % 5 == 0:
+    elif ask != 'Buzz' and count % 5 == 0 and count % 3 != 0:
         to_lose = True
     elif ask != 'Fizz Buzz' and count % 3 == 0 and count % 5 == 0:
         to_lose = True
