@@ -6,8 +6,10 @@
 """
 
 def pig_latin(word):
+    # Согласные и гласные
     consonants = 'wrtpsdfghjklzxcvbnm'
     vowels = 'aieou'
+
     if word[0] in vowels:
         return word + 'way'
     elif word[0] in consonants:
