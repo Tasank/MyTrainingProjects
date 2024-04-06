@@ -15,8 +15,8 @@ from random import randrange
 # Колода карт
 def createDeck():
     deck = []
-    nominal = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
-    suits = ['s', 'h', 'd', 'c']
+    nominal = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Валет', 'Дама', 'Король', 'Туз']
+    suits = ['_Черви', '_Бубны', '_Крести', '_Пики']
     for suit in suits:
         for nom in nominal:
             deck.append(nom + suit)
