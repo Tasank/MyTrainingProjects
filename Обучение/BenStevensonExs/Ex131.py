@@ -10,75 +10,67 @@
 """
 
 # Сначала проверьте, удовлетворяет ли вас результат программы, прежде чем её копировать.
-def isOperator(c):
-    return not (c >= 'а' and c <= 'я') and not (c >= '0' and c <= '9') and not (c >= 'А' and c <= 'Я')
+import re
+
+# уровень приоритета поддерживаемых операторов
+PRECEDENCE = {
+    '^': 4,  # самый высокий уровень приоритета
+    '*': 3,
+    '/': 3,
+    '+': 2,
+    '-': 2,
+    '(': 1,
+}
 
 
-def getPriority(C):
-    if C == '-' or C == '+':
-        return 1
-    elif C == '*' or C == '/':
-        return 2
-    elif C == '^':
-        return 3
-    return 0
+def infixToPostfix(expr):
+    tokens = re.findall(r"(\b\w*[\.]?\w+\b|[\(\)\^\+\*\-\/])", expr)
+    stack = []
+    postfix = []
 
+    for token in tokens:
+        # Если токен является операндом, то не помещайте его в стек.
+        # Вместо этого передайте его в выходные данные.
+        if token.isalnum():
+            postfix.append(token)
 
-def infixToPostfix(infix):
-    operators = []
-    operands = []
+        # Если ваш текущий токен заключен в правую круглую скобку
+        # поместите его в стек
+        elif token == '(':
+            stack.append(token)
 
-    for i in range(len(infix)):
+        # Если ваш текущий токен заключен в правую круглую скобку,
+        # расширяйте стек до тех пор, пока не останется первая левая круглая скобка.
+        # Выведите все символы, кроме круглых скобок.
+        elif token == ')':
+            top = stack.pop()
+            while top != '(':
+                postfix.append(top)
+                top = stack.pop()
 
-        if infix[i] == '(':
-            operators.append(infix[i])
-
-        elif (infix[i] == ')'):
-            while len(operators) != 0 and (operators[-1] != '('):
-                op1 = operands[-1]
-                operands.pop()
-                op2 = operands[-1]
-                operands.pop()
-                op = operators[-1]
-                operators.pop()
-                tmp = op + op2 + op1
-                operands.append(tmp)
-            operators.pop()
-        elif not isOperator(infix[i]):
-            operands.append(infix[i] + "")
-
+        # Прежде чем вы сможете поместить оператор в стек,
+        # вы должны просмотреть стек, пока не найдете оператор
+        # с более низким приоритетом, чем у текущего оператора.
+        # Извлеченные элементы стека записываются в выходные данные.
         else:
-            while len(operators) != 0 and getPriority(infix[i]) <= getPriority(operators[-1]):
-                op1 = operands[-1]
-                operands.pop()
+            while stack and (PRECEDENCE[stack[-1]] >= PRECEDENCE[token]):
+                postfix.append(stack.pop())
+            stack.append(token)
 
-                op2 = operands[-1]
-                operands.pop()
+    # После того, как все выражение будет проверено,
+    # извлеките оставшуюся часть стека
+    # и запишите операторы из стека в выходные данные.
+    while stack:
+        postfix.append(stack.pop())
+    return postfix
 
-                op = operators[-1]
-                operators.pop()
 
-                tmp = op + op2 + op1
-                operands.append(tmp)
-            operators.append(infix[i])
-
-    while len(operators) != 0:
-        op1 = operands[-1]
-        operands.pop()
-
-        op2 = operands[-1]
-        operands.pop()
-
-        op = operators[-1]
-        operators.pop()
-
-        tmp = op + op2 + op1
-        operands.append(tmp)
-    return operands[-1]
+# конвертация
 
 def main():
-    s = input("Введите инфиксное выражение: ")
-    print("Постфиксный результат: ", infixToPostfix(s))
+    expressions = input("Введите инфиксное выражение без пробелов: ")
+    print("Постфиксный результат: ", infixToPostfix(expressions))
 
 if __name__ == '__main__':
     main()
+
