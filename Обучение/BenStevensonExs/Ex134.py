@@ -6,3 +6,20 @@
 гарантированно являющийся подсписком для любого списка. Напишите основную программу,
 демонстрирующую работу функции применительно к нескольким исходным спискам.
 """
+larger = [1, 2, 3]
+list_sublists = [[]]
+
+def check(larger):
+    # Каждая итерация внешнего цикла определяет длину подсписков, а внутренняя начальный индекс этих подсписков
+    for l in range(1, len(larger) + 1):
+        for i in range(0, len(larger) - l + 1):
+            list_sublists.append(larger[i:i + l])
+    return list_sublists
+
+def main():
+    larger = list(map(int, input('Введите список чисел через пробел: ').split()))
+    print('Подсписки вашего списка: ')
+    print(check(larger))
+
+if __name__ == '__main__':
+    main()
