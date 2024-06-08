@@ -5,10 +5,6 @@
 True только в том случае, если список smaller является подсписком списка larger.
 Напишите также основную программу для демонстрации работы функции.
 """
-larger = [1, 2, 3, 4, 5]
-smaller = [4, 5]
-
-
 
 def isSublist(larger, smaller):
     if not smaller:
