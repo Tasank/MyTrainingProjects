@@ -8,3 +8,28 @@
 что представлена в табл. 6.1. Выразите частоту выпадения каждого из чисел в процентах вместе с ожидаемым результатом
 согласно теории вероятностей.
 """
+from random import randint
+
+MAX_VARIABLE = 1000
+
+def random_nums():
+    x = randint(1,6)
+    y = randint(1, 6)
+    return x + y
+
+def main():
+    # Значения согласно теории вероятности
+    expected = {2: 1/36, 3: 2/36, 4: 3/36, 5: 4/36, 6: 5/36,
+                7: 6/36, 8: 5/36, 9: 4/36, 10: 3/36, 11: 2/36, 12: 1/36}
+
+    counts = {i: 0 for i in range(2, 13)}
+
+    for i in range(MAX_VARIABLE):
+        t = random_nums()
+        counts[t] = counts[t] + 1
+
+    print('Всего  Реальный(%)  Ожидаемый(%)')
+    for i in sorted(counts.keys()):
+        print("%5d %9.2f %10.2f" %(i,counts[i] / MAX_VARIABLE * 100, expected[i] * 100))
+
+main()
