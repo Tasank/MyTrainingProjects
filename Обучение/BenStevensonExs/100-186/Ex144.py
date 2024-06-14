@@ -6,3 +6,36 @@
 Расширьте свою программу из упражнения 143, добавив возможность проверки на анаграммы целых фраз.
 При анализе не обращайте внимания на знаки препинания, заглавные буквы и пробелы.
 """
+
+def are_anagrams(text1, text2):
+    # Создаём словари для подсчёта количества каждой буквы
+    count1 = {}
+    count2 = {}
+
+    # Удаляем пробелы и знаки препинания, приводим к нижнему регистру
+    text1 = ''.join(filter(str.isalnum, text1.lower()))
+    text2 = ''.join(filter(str.isalnum, text2.lower()))
+
+    for letter in text1:
+        count1[letter] = count1.get(letter, 0) + 1
+
+    for letter in text2:
+        count2[letter] = count2.get(letter, 0) + 1
+
+    # Сравниваем словари
+    return count1 == count2
+
+def main():
+    # Запрашиваем у пользователя две фразы
+    phrase1 = input("Введите первую фразу: ")
+    phrase2 = input("Введите вторую фразу: ")
+
+    # Проверяем, являются ли фразы анаграммами
+    if are_anagrams(phrase1, phrase2):
+        print("Фразы являются анаграммами.")
+    else:
+        print("Фразы не являются анаграммами.")
+
+# Запускаем основную функцию
+if __name__ == "__main__":
+    main()
