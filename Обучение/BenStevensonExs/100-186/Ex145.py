@@ -7,3 +7,34 @@
 Напишите программу, рассчитывающую и отображающую количество очков за собранное слово. Создайте словарь для
 хранения соответствий между буквами и очками и используйте его в своем решении.
 """
+# Словарь с буквами, приносящими 1 очко
+ONE_POINT_LIST = ['A', 'E', 'I', 'L', 'N', 'O', 'R', 'S', 'T', 'U']
+
+# Генератор словаря, который добавляет ключ из списка со значением 1
+one_point_dict = {char: 1 for char in ONE_POINT_LIST}
+
+# Словарь с буквами и их соответствующими очками
+chars_point_dict = {
+    'D': 2, 'G': 2, 'B': 3, 'C': 3, 'M': 3, 'P': 3, 'F': 4, 'H': 4,
+    'V': 4, 'W': 4, 'Y': 4, 'K': 5, 'J': 8, 'X': 8, 'Q': 10, 'Z': 10
+}
+
+# Объединение словарей с помощью оператора |
+combined_point_dict = one_point_dict | chars_point_dict
+
+def scoring_points(text):
+    """Функция подсчёта очков"""
+    count = 0
+    for char in text:
+        char = char.upper()
+        if char in combined_point_dict:
+            value = combined_point_dict[char]
+            count += value
+    return count
+
+def main():
+    text = input('Введите собранное слово: ')
+    print('Ваше количество очков: ', scoring_points(text))
+
+if __name__ == "__main__":
+    main()
