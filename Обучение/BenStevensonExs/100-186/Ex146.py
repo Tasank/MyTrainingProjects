@@ -6,3 +6,36 @@
 В основной программе создайте карту лото случайным образом и выведите ее на экран.
 Ваша программа должна запускаться только в том случае, если она не импортирована в виде модуля в другой файл.
 """
+from random import randint
+def generate_random_card():
+    """функция, которая будет создавать случайную карточку лото и сохранять ее в словаре"""
+    BINGO_DICT = {'B': [], 'I': [], 'N': [], 'G': [], 'O': []}
+    count = 0
+    while count != 5:
+        count += 1
+        number_1 = randint(1, 15)
+        BINGO_DICT['B'].append(number_1)
+
+        number_2 = randint(16, 30)
+        BINGO_DICT['I'].append(number_2)
+
+        number_3 = randint(31, 45)
+        BINGO_DICT['N'].append(number_3)
+
+        number_4 = randint(46, 60)
+        BINGO_DICT['G'].append(number_4)
+
+        number_5 = randint(61, 75)
+        BINGO_DICT['O'].append(number_5)
+
+    return BINGO_DICT
+def display_card():
+    """Функция для отображения созданной карточки лото на экране со столбцами с заголовками"""
+
+def main():
+   print()
+
+if __name__ == '__main__':
+    main()
+
+print(generate_random_card())
