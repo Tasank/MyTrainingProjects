@@ -39,7 +39,7 @@ def display_card(dict_card):
     print(" B |  I |  N |  G |  O ")
     print("---|----|----|----|----")
     for i in range(5):
-        print(f"{dict_card['B'][i]:2} | "
+        print(f"{dict_card['B'][i]:2} | " # :2 - Это выравнивание по правому краю на 2 символа
               f"{dict_card['I'][i]:2} | "
               f"{dict_card['N'][i]:2} | "
               f"{dict_card['G'][i]:2} | "
