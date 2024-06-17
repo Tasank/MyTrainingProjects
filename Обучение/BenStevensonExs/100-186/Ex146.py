@@ -34,6 +34,7 @@ def generate_random_card():
         BINGO_DICT[letter] = [randint(ranges[letter][0], ranges[letter][1]) for _ in range(5)]
 
     return BINGO_DICT
+
 def display_card(dict_card):
     """Функция для отображения созданной карточки лото на экране со столбцами с заголовками"""
     print(" B |  I |  N |  G |  O ")
