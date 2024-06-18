@@ -10,3 +10,25 @@
 выигрышем по вертикали, горизонтали и диагонали, а также карточки, на которые выигрыш не выпал.
 При решении этой задачи воспользуйтесь функциями из упражнения 146.
 """
+from Ex146 import *
+def is_winning_card(dict_card):
+    """Проверка вертикальных линий"""
+    # Если все числа в списке, соответствующему текущей букве, равны 0
+    for letter in 'BINGO':
+        if all(num == 0 for num in dict_card[letter]):
+            return True
+
+    """Проверка горизонтальных линий"""
+    for i in range(5):
+        if all(dict_card[letter][i] == 0 for letter in 'BINGO'): # dict_card[letter][i] обращаемся к значению в словаре
+            return True
+
+    """Проверка диагональных линий"""
+    # Проверка слева направо, сверху вниз
+    if all(dict_card['BINGO'[i]][i] == 0 for i in range(5)):
+        return True
+    # Проверка справа налево, сверху вниз
+    if all(dict_card['BINGO'[i]][4 - i] for i in range(5)):
+        return True
+
+def demonstrate_winning_card():
