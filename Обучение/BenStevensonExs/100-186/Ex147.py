@@ -32,3 +32,35 @@ def is_winning_card(dict_card):
         return True
 
 def demonstrate_winning_card():
+    # Пример горизонтальной выигрышной карточки
+    horizontal_win_card = generate_random_card()
+    horizontal_win_card['B'] = [0, 0, 0, 0, 0]
+
+    # Пример вертикальной выигрышной карточки
+    vertical_win_card = generate_random_card()
+    for letter in "BINGO":
+        vertical_win_card[letter][0] = 0
+
+    # Пример диагональной выигрышной карточки
+    diagonal_win_card = generate_random_card()
+    for i in range(5):
+        diagonal_win_card["BINGO"[i]][i] = 0
+
+    # Пример карточки без выигрыша
+    no_win_card = generate_random_card()
+
+    cards = [horizontal_win_card, vertical_win_card, diagonal_win_card, no_win_card]
+    results = ["Горизонтальный выйгрыш", "Вертикальный выйгрыш", "Диагональный выйгрыш", "Пройгрыш"]
+
+    for card, result in zip(cards, results):
+        print(f"Тип карты: {result}")
+        display_card(card)
+        print(f"Победа: {is_winning_card(card)}")
+        print()
+
+def main():
+    demonstrate_winning_card()
+
+if __name__ == '__main__':
+    main()
+
