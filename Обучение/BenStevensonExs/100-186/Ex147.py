@@ -52,6 +52,7 @@ def demonstrate_winning_card():
     cards = [horizontal_win_card, vertical_win_card, diagonal_win_card, no_win_card]
     results = ["Горизонтальный выйгрыш", "Вертикальный выйгрыш", "Диагональный выйгрыш", "Пройгрыш"]
 
+    # zip принимает несколько аргументов и объединяет элементы этих объектов в кортежи
     for card, result in zip(cards, results):
         print(f"Тип карты: {result}")
         display_card(card)
