@@ -5,21 +5,24 @@
 Напишите программу на Python, имитирующую поведение этой утилиты. Если файла, указанного пользователем,
 не существует, или не задан аргумент командной строки, необходимо вывести соответствующее сообщение об ошибке.
 """
-# content = 'exemple.txt'
-def read_ten_str_file(content):
+import sys
+
+# file_name = 'exemple.txt'
+
+def head(file_name):
     try:
-        read_file = open(content, 'r')
-        for i in range(10):
-            line = read_file.readline()
-            if line:
-                print(line)
-            else:
-                break
-        read_file.close()
+        # with используется для обеспечения правильного закрытия файла после его использования
+        with open(file_name, 'r') as file:
+            line = file.readlines()
+            print(''.join(line[:10]))
 
     except FileNotFoundError:
-        print(f'Файл {content} не найден')
+        print(f'Файл {file_name} не найден')
 
-content = input('Введите имя файла: ')
-
-read_ten_str_file(content)
+if len(sys.argv) < 2:
+    print("Не указано имя файла")
+else:
+    file_name = sys.argv[1]
+    head(file_name)
+# Можно запускать эту программу в качестве аргумента командной строки
+# --> py Ex149_Файлы_Исключения.py exemple.txt
