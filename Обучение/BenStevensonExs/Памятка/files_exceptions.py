@@ -56,3 +56,14 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# content_list = ['Рядовой', 'Ефрейтор', 'Младший сержант', 'Сержант', 'Старший Сержант', 'Прапорщик', ]
+# file = open('test.txt', 'w')
+#
+# for content in content_list:
+#     file.write((content) + '\n')
+# file.close()
+#
+# read_file = open('test.txt', 'r')
+# for line in read_file:
+#     print(line, end='')

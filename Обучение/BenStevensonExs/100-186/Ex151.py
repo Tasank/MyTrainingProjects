@@ -19,6 +19,9 @@ def cat():
             for line in inf:
                 print(line, end='')
             inf.close()
+            # Разделительная строка
+            print()
+            print('---Следующий файл---')
 
         except FileNotFoundError:
             print(f'Не удалось открыть {file_name}')
