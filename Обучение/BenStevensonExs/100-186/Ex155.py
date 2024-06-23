@@ -7,7 +7,6 @@
 файле вам стоит игнорировать регистры.
 """
 
-
 def most_frequent_words(filename):
     word_counts = Counter()
 
