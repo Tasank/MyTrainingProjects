@@ -16,7 +16,6 @@ while line != '':
     try:
         line = input('Введите число (Для выхода Enter): ')
         num = float(line)
-
         total += num
 
         print('Текущая сумма чисел = ', total)
