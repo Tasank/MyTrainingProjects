@@ -9,18 +9,31 @@
 """
 grades_dict = {'A': 5, 'B': 4, 'C': 3, 'D': 2, 'F': 1}
 
-ask = input('Введите буквенную или числовую оценку: ')
-# сконвертировать введенное пользователем значение из числового в буквенное
-try:
-    number = int(ask)
-    for key, value in grades_dict.items():
-        if value == number:
-            print(f'Буквенная оценка {key}')
+while True:
+    ask = input('Введите буквенную или числовую оценку (или оставьте пустым для завершения): ')
 
-# Если возникнет исключение, выполнить обратное преобразование – из буквенного в числовое
-except:
+    if ask == '':
+        break
+
     try:
-        letter = ask.upper()
-        print('Это числовая оценка: ', grades_dict[letter])
-    except:
-        print('Введенное значение не является допустимым.')
+        # Пробуем конвертировать введенное значение из числового в буквенное
+        number = int(ask)
+        found = False
+        for key, value in grades_dict.items():
+            if value == number:
+                print(f'Буквенная оценка: {key}')
+                found = True
+                break
+        if not found:
+            print('Введенное числовое значение не является допустимым.')
+            print()
+
+    except ValueError:
+        # Если возникло исключение, пробуем выполнить обратное преобразование – из буквенного в числовое
+        try:
+            letter = ask.upper()
+            print('Это числовая оценка: ', grades_dict[letter])
+        except KeyError:
+            print('Введенное значение не является допустимым.')
+            print()
+
