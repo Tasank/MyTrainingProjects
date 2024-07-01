@@ -8,6 +8,7 @@
 import os
 
 # Данные имён можно скачать с официального SSA (например, по адресу https://www.ssa.gov/oact/babynames/limits.html)
+# Уникальные множества самых популярных имён
 set_boy_name_leaders = set()
 set_girl_name_leaders = set()
 
