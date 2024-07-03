@@ -13,12 +13,12 @@ set_boy_name_leaders = set()
 set_girl_name_leaders = set()
 
 # Путь к папке с файлами, расположенный рядом с текущим скриптом
-data_patch = os.path.join(os.path.dirname(__file__), 'names')
+data_path = os.path.join(os.path.dirname(__file__), 'names')
 
 # Обработка файлов
 for year in range(1880, 2023):
     file_name = f'yob{year}.txt'
-    file_patch = os.path.join(data_patch, file_name)
+    file_patch = os.path.join(data_path, file_name)
 
     #  Проверка существования файла
     if os.path.exists(file_patch):
