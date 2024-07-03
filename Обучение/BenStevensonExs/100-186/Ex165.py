@@ -49,7 +49,8 @@ for year in range(first_year, second_year + 1):
     else:
         print(f'Файл {file_name} не найден.')
 
-# Определение самых популярных имен
+# Определение самых популярных имен.
+# Добавил проверку на наличие данных в словаре, если пустые то вывод 'Нет данных'
 boys_name_leader = max(boys_counter, key=boys_counter.get) if boys_counter else 'Нет данных'
 girls_name_leader = max(girls_counter, key=girls_counter.get) if girls_counter else 'Нет данных'
 
