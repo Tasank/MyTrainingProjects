@@ -18,12 +18,12 @@ data_path = os.path.join(os.path.dirname(__file__), 'names')
 # Обработка файлов
 for year in range(1880, 2023):
     file_name = f'yob{year}.txt'
-    file_patch = os.path.join(data_path, file_name)
+    file_path = os.path.join(data_path, file_name)
 
     #  Проверка существования файла
-    if os.path.exists(file_patch):
+    if os.path.exists(file_path):
         try:
-            with open(file_patch, 'r') as read_file:
+            with open(file_path, 'r') as read_file:
                 # Инициализируем счётчики
                 boys_counter = {}
                 girls_counter = {}
