@@ -8,3 +8,31 @@
 должно появляться соответствующее сообщение об ошибке.
 """
 import sys
+from Ex117 import *
+def repeat_words(file_name):
+    try:
+        with open(file_name,  'r', encoding='utf-8') as readfile:
+            words_set = set()
+            count_line = 0
+            for line in readfile:
+                count_line += 1
+                update_line = word(line)
+                for w in update_line:
+                    w = w.lower()
+                    if w in words_set:
+                        print(f'Найден повтор! Номер строки - ({count_line}), дублирующееся слово - {w}')
+                    else:
+                        words_set.add(w)
+
+    except FileNotFoundError:
+        print(f'Ошибка: файл ({file_name} не найден!)')
+
+def main():
+    if len(sys.argv) != 2:
+        print("Ошибка: не указано имя файла.")
+        quit()
+    else:
+        file_name = sys.argv[1]
+        repeat_words(file_name)
+if __name__ == '__main__':
+    main()
