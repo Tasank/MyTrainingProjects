@@ -6,21 +6,29 @@
 предшествующая строчка должна начинаться со знака #. Перечислите названия всех функций,
 не снабженных комментариями, вместе с именем файла и номером строки, с которой начинается объявление функции
 """
-filename = 'Ex160.py'
+import sys
 
-try:
-    with open(filename, 'r', encoding='utf-8') as readfile:
-        count = 0
-        previous_line = ''  # Инициализируем предыдущую строку как пустую
-        for line in readfile:
-            count += 1
-            check_line = line.strip().split()  # Убираем пробелы по краям и делим строку на слова
+if len(sys.argv) < 2:
+    print('Недостаточно аргументов! Введите имена файлов,которы хотите проверить.')
+    quit()
+else:
+    for i in range(1, len(sys.argv)):
+        filename = sys.argv[i]
+        try:
+            with open(filename, 'r', encoding='utf-8') as readfile:
+                count = 0
+                previous_line = ''  # Инициализируем предыдущую строку как пустую
+                for line in readfile:
+                    count += 1
+                    check_line = line.strip().split()  # Убираем пробелы по краям и делим строку на слова
 
-            if len(check_line) > 0 and check_line[0] == 'def':  # Проверяем, начинается ли строка с 'def'
-                if not previous_line.strip().startswith('#'):  # Проверяем, начинается ли предыдущая строка с '#'
-                    function_name = check_line[1].split('(')[0]  # Извлекаем имя функции
-                    print(f'В файле {filename}, функция ({function_name}) не документирована! Номер строки - {count}')
+                    if len(check_line) > 0 and check_line[0] == 'def':  # Проверяем, начинается ли строка с 'def'
+                        if not previous_line.strip().startswith(
+                                '#'):  # Проверяем, начинается ли предыдущая строка с '#'
+                            function_name = check_line[1].split('(')[0]  # Извлекаем имя функции
+                            print(
+                                f'В файле {filename}, функция ({function_name}) не документирована! Номер строки - {count}')
 
-            previous_line = line  # Обновляем предыдущую строку
-except FileNotFoundError:
-    print('Файл не найден.')
+                    previous_line = line  # Обновляем предыдущую строку
+        except FileNotFoundError:
+            print('Файл не найден.')
