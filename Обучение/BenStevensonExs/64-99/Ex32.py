@@ -6,4 +6,5 @@
 """
 number = input('Введите целое четырехзначное число: ')
 total = int(number[0]) + int(number[1]) + int(number[2]) + int(number[3])
+# Другой вариант total = sum(int(digit) for digit in number)
 print(f'Сумма цифр в числе - {total}')
