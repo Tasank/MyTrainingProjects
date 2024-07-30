@@ -6,6 +6,7 @@
 def check_year(year):
     # Переменная для определения года
     total = False
+
     # Проходим по условиям
     if year % 400 == 0:
         total = True
@@ -16,6 +17,7 @@ def check_year(year):
 def main():
     # Ввод года пользователем
     year = int(input('Введите интересующий год: '))
+
     # Если total = False, то год не високосный
     if check_year(year):
         print(f'{year} год является високосным.')
