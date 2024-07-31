@@ -9,7 +9,7 @@ def transformation(num):
     if num < 0:
         return "Введите неотрицательное число"
     elif num == 0 or num == 1:
-        return num
+        return str(num)
     else:
         transformation(num // 2) + str(num % 2)
 # Основная программа. Вывод результата
