@@ -28,9 +28,9 @@ def main():
 
     # Проверяем, можно ли собрать сумму из заданного количества монет
     if can_make_amount(amount, num_coins):
-        print("Можно собрать сумму {} центов из {} монет.".format(amount, num_coins))
+        print(f"Можно собрать сумму {amount} центов из {num_coins} монет.")
     else:
-        print("Нельзя собрать сумму {} центов из {} монет.".format(amount, num_coins))
+        print(f"Нельзя собрать сумму {amount} центов из {num_coins} монет.")
 
 if __name__ == "__main__":
     main()
