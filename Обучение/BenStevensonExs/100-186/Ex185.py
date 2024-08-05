@@ -5,3 +5,21 @@
 На выходе должен получиться расшифрованный список элементов. В основной программе продемонстрируйте работу алгоритма
 декодирования на примере представленного здесь списка.
 """
+
+def decoding_list(data):
+    # Базовый случай
+    if not data:
+        return []
+
+    element = data[0]
+    count = data[1]
+
+    return [element] * count + decoding_list(data[2:])
+
+def main():
+    encoded_data = ["A", 12, "B", 4, "A", 6, "B", 1]
+    decoded_data = decoding_list(encoded_data)
+    print(decoded_data)
+
+if __name__ == "__main__":
+    main()
