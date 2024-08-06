@@ -15,3 +15,5 @@ def generate_combinations(s):
             lst.append(current + combination)
 
     return lst
+
+print(generate_combinations('Google'))
