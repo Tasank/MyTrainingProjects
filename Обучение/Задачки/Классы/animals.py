@@ -26,13 +26,15 @@ two_dog.hungry()
 
 print('|   Конец проверки    ')
 print('|_____________________')
+# Класс хищника, атрибуты возраст, название, место обитания и пол
+
 class Predator:
     def __init__(self, age, name, habitat, gender):
         self.age = age
         self.name = name
         self.habitat = habitat
         self.gender = gender
-
+    # Метод выводит информацию об объекте
     def info(self):
         print((f'Объект - {self.name}| возраст - {self.age}| место обитания - {self.habitat}| особь - ({self.gender})'
                 f' пола.'))
