@@ -1,5 +1,5 @@
 """
-
+Классы состав Армий.
 """
 
 class Army:
@@ -58,6 +58,18 @@ class Army:
         return 'Категория не найдена.'
 
 RussianArmy = Army()
-RussianArmy.update_unit_count("ground_forces", "Motor Rifle Troops", 500)
-print(RussianArmy.get_unit("ground_forces", "Motor Rifle Troops"))
 
+# Обновляем количество войск
+RussianArmy.update_unit_count('ground_forces', 'Motor Rifle Troops', 280000)
+RussianArmy.update_unit_count('ground_forces', 'Tank Troops', 13000)
+RussianArmy.update_unit_count('ground_forces', 'Artillery and Rocket Troops', 20000)
+RussianArmy.update_unit_count('ground_forces', 'Air Defense Troops', 10000)
+RussianArmy.update_unit_count('ground_forces', 'Engineering Troops', 15000)
+
+RussianArmy.update_unit_count('aerospace_forces', 'Air Force', 190000)
+RussianArmy.update_unit_count('aerospace_forces', 'Space Forces', 50000)
+RussianArmy.update_unit_count('aerospace_forces', 'Air and Missile Defense Forces', 40000)
+
+RussianArmy.update_unit_count('navy', 'Surface Forces', 150000)
+RussianArmy.update_unit_count('navy', 'Submarine Forces', 60000)
+print(RussianArmy.get_unit("ground_forces", "Motor Rifle Troops"))
