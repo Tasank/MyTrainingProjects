@@ -58,12 +58,18 @@ def human(armor_modifier=0, weapon_modifier=0, damage_modifier=0, mining_speed_m
 health, damage, mining_speed = human()
 print(mining_speed)
 
-# Функция твердотельного бура возвращает кол-во прочности, скорость добычи и загрязнения
+# Класс твердотельного бура возвращает кол-во прочности, скорость добычи и загрязнения
 # @param deposit - ресурс в месторождении
 # @param coal - угль необходимый для работы бура
 # @param endurance_damage - Модификатор изменения прочности
 # @return добытый ресурс, прочность, загрязнение
-def solid_state_drill(deposit ,coal, endurance_damage=0, mining_speed_modifier=0):
+class Solid_State_Drill:
+    def __init__(self, deposit, coal, endurance_damage=0, mining_speed_modifier=0):
+        self.deposit = deposit
+        self.coal = coal
+        self.endurance_damage = endurance_damage
+        self.mining_speed_modifier = mining_speed_modifier
+
     endurance = 700 + endurance_damage
     mining_speed = 0.25 + mining_speed_modifier
 
