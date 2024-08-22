@@ -70,14 +70,15 @@ class Solid_State_Drill:
         self.endurance_damage = endurance_damage
         self.mining_speed_modifier = mining_speed_modifier
 
-    endurance = 700 + endurance_damage
-    mining_speed = 0.25 + mining_speed_modifier
+    def update_check(self):
+        endurance = 700 + self.endurance_damage
+        mining_speed = 0.25 + self.mining_speed_modifier
 
-    if coal < 1:
-        extracted_deposit = 0
-        pollution = 0
-        return endurance
-    else:
-        extracted_deposit = 1
-        pollution = 12
-        return endurance,
+        if self.coal < 1:
+            extracted_deposit = 0
+            pollution = 0
+            return endurance
+        else:
+            extracted_deposit = 1
+            pollution = 12
+            return endurance,
