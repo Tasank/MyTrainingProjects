@@ -74,6 +74,7 @@ class Solid_State_Drill:
         endurance = 700 + self.endurance_damage
         mining_speed = 0.25 + self.mining_speed_modifier
 
+
         if self.coal < 1:
             extracted_deposit = 0
             pollution = 0
