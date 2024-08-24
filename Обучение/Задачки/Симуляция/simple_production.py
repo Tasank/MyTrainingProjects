@@ -7,10 +7,7 @@ def deposit(count):
     return count, choice(name_set)
 
 ## Описать класс фабрики
-class Fabric():
-
-
-
+class Fabric:
 
 
 def player(time):
