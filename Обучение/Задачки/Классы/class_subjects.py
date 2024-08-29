@@ -12,8 +12,6 @@ class Paper:
         self.usable_area = self.size
         self.content = ''
 
-        self.info_paper()
-
 
     def __str__(self):
         return f'Это {self.material} бумага размером {self.size} цвета ({self.color}).'
@@ -25,12 +23,32 @@ class Paper:
         else:
             self.content += text
             self.usable_area -= len(text)
+        print(f'В бумаге осталось {self.usable_area} символов.')
         return self
 
 
+    def info(self):
+        # Подсчитываем количество строк и столбцов для вывода содержания бумаги
+        rows = int(self.size / 100) + 2  # Добавляем 2 строки для рамки
+        cols = int(self.size / 20) + 2  # Добавляем 2 столбца для рамки
 
-    def info_paper(self):
+        # Выводим верхнюю часть рамки
+        print('+' + '-' * (cols - 2) + '+')
+
+        # Выводим содержание бумаги
+        lines = self.content.split('\n')
+        for i in range(rows - 2):
+            line = lines[i] if i < len(lines) else ''
+            print('|' + line.ljust(cols - 2) + '|')
+
+        # Выводим нижнюю часть рамки
+        print('+' + '-' * (cols - 2) + '+')
+
+        # Выводим информацию о бумаге
         print(f'Это {self.material} бумага размером {self.size} цвета ({self.color}).')
+        print(f'В бумаге осталось {self.usable_area} символов.')
+
+
 
 
 class Pen:
@@ -97,6 +115,7 @@ class Pen:
         print(f'Возможный тип ручки - {self.material_list}')
 
 
-pen_1 = Pen('1', '2', 1)
+pen_1 = Pen('1', '2', 1000)
 pen_1.info_pen()
-paper_1 = Paper
+paper_1 = Paper()
+paper_1.info()
