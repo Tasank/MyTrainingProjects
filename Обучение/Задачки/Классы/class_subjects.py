@@ -2,56 +2,113 @@ import random
 from random import choice
 
 class Paper:
-    def __init__(self, size=None):
-        self.color_list = ['красный', 'чёрный', 'синий', 'зелёный', 'фиолетовый', 'жёлтый', 'розовый']
+    """
+    Класс бумаги
+    Атрибуты: размер, цвет, материал
+    Методы: печать текста
+    """
+    def __init__(self, size=None, color=None, material=None):
+        self.color_list = ['белый', 'красный', 'чёрный', 'синий', 'зелёный', 'фиолетовый', 'жёлтый', 'розовый']
         self.material_list = ['офисная', 'глянцевая', 'газетная', 'типографская', 'упаковочная']
         self.size_list = [1500, 3000, 5000, 7000, 10000, 15000, 20000, 25000, 30000, 32000]
-        self.color = choice(self.color_list)
-        self.material = choice(self.material_list)
-        self.size = random.choice(self.size_list)
+        # Если введённые атрибуты существуют в списке, то присваиваем их, если нет, то присваиваем случайное значение
+        if color in self.color_list:
+            self.color = color
+        else:
+            self.color = choice(self.color_list)
+
+        if material in self.material_list:
+            self.material = material
+        else:
+            self.material = choice(self.material_list)
+
+        if size:
+            self.size = size
+        else:
+            self.size = random.choice(self.size_list)
+
         self.usable_area = self.size
         self.content = ''
 
+        def __str__(self):
+            return f'Это {self.material} бумага размером {self.size} цвета ({self.color}).'
 
-    def __str__(self):
-        return f'Это {self.material} бумага размером {self.size} цвета ({self.color}).'
+        def take_damage(self, text):
+            if self.usable_area <= 0:
+                print('Бумага заполнена')
+                self.usable_area = 0
+            else:
+                self.content += text
+                self.usable_area -= len(text)
+            print(f'В бумаге осталось {self.usable_area} символов.')
+            return self
 
-    def take_damage(self, text):
-        if self.usable_area <= 0:
-            print('Бумага заполнена')
-            self.usable_area = 0
+        def info(self):
+            # Подсчитываем количество строк и столбцов для вывода содержания бумаги
+            rows = int(self.size / 100) + 2  # Добавляем 2 строки для рамки
+            cols = int(self.size / 20) + 2  # Добавляем 2 столбца для рамки
+
+            # Выводим верхнюю часть рамки
+            print('+' + '-' * (cols - 2) + '+')
+
+            # Выводим содержание бумаги
+            lines = self.content.split('\n')
+            for i in range(rows - 2):
+                line = lines[i] if i < len(lines) else ''
+                print('|' + line.ljust(cols - 2) + '|')
+
+            # Выводим нижнюю часть рамки
+            print('+' + '-' * (cols - 2) + '+')
+
+            # Выводим информацию о бумаге
+            print(f'Это {self.material} бумага размером {self.size} цвета ({self.color}).')
+            print(f'В бумаге осталось {self.usable_area} символов.')
+
+
+class Copybook:
+
+    def __init__(self, size=None, color=None, material=None, count=30):
+        self.color_list = ['белый', 'красный', 'чёрный', 'синий', 'зелёный', 'фиолетовый', 'жёлтый', 'розовый']
+        self.material_list = ['тетрадь', 'альбом', 'блокнот', 'книга']
+
+        if color in self.color_list:
+            self.color = color
         else:
-            self.content += text
-            self.usable_area -= len(text)
-        print(f'В бумаге осталось {self.usable_area} символов.')
-        return self
+            self.color = 'белый'
 
+        if material in self.material_list:
+            self.material = material
+        else:
+            self.material = 'тетрадь'
 
-    def info(self):
-        # Подсчитываем количество строк и столбцов для вывода содержания бумаги
-        rows = int(self.size / 100) + 2  # Добавляем 2 строки для рамки
-        cols = int(self.size / 20) + 2  # Добавляем 2 столбца для рамки
+        if self.material == 'тетрадь':
+            self.count = 48
+        elif self.material == 'альбом':
+            self.count = 36
+        elif self.material == 'блокнот':
+            self.count = 24
+        elif self.material == 'книга':
+            self.count = 200
 
-        # Выводим верхнюю часть рамки
-        print('+' + '-' * (cols - 2) + '+')
+        if size:
+            self.size = size
+        else:
+            self.size = 1000
 
-        # Выводим содержание бумаги
-        lines = self.content.split('\n')
-        for i in range(rows - 2):
-            line = lines[i] if i < len(lines) else ''
-            print('|' + line.ljust(cols - 2) + '|')
+        self.sheets_list = []
 
-        # Выводим нижнюю часть рамки
-        print('+' + '-' * (cols - 2) + '+')
-
-        # Выводим информацию о бумаге
-        print(f'Это {self.material} бумага размером {self.size} цвета ({self.color}).')
-        print(f'В бумаге осталось {self.usable_area} символов.')
-
+    def sheets(self, count):
+        for i in count:
+            new_sheets = Paper(self.size, self.color, self.material)
 
 
 
 class Pen:
+    """
+    Класс ручка
+    Атрибуты: цвет, материал, количество пасты в миллиграммах
+    Методы:
+    """
     def __init__(self, color=None, material=None, pasta=None):
         """
         Конструктор для класса Pen
