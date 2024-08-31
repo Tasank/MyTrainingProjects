@@ -12,57 +12,63 @@ class Paper:
         self.material_list = ['офисная', 'глянцевая', 'газетная', 'типографская', 'упаковочная']
         self.size_list = [1500, 3000, 5000, 7000, 10000, 15000, 20000, 25000, 30000, 32000]
         # Если введённые атрибуты существуют в списке, то присваиваем их, если нет, то присваиваем случайное значение
-        if color in self.color_list:
-            self.color = color
-        else:
-            self.color = choice(self.color_list)
-
-        if material in self.material_list:
-            self.material = material
-        else:
-            self.material = choice(self.material_list)
-
-        if size:
-            self.size = size
-        else:
-            self.size = random.choice(self.size_list)
-
+        self.color = self._validate_color(color)
+        self.material = self._validate_material(material)
+        self.size = self._validate_size(size)
         self.usable_area = self.size
         self.content = ''
 
-        def __str__(self):
-            return f'Это {self.material} бумага размером {self.size} цвета ({self.color}).'
+    def _validate_color(self, color):
+        if color in self.color_list:
+            return color
+        else:
+            return random.choice(self.color_list)
 
-        def take_damage(self, text):
-            if self.usable_area <= 0:
-                print('Бумага заполнена')
-                self.usable_area = 0
-            else:
-                self.content += text
-                self.usable_area -= len(text)
-            print(f'В бумаге осталось {self.usable_area} символов.')
-            return self
+    def _validate_material(self, material):
+        if material in self.material_list:
+            return material
+        else:
+            return random.choice(self.material_list)
 
-        def info(self):
-            # Подсчитываем количество строк и столбцов для вывода содержания бумаги
-            rows = int(self.size / 100) + 2  # Добавляем 2 строки для рамки
-            cols = int(self.size / 20) + 2  # Добавляем 2 столбца для рамки
+    def _validate_size(self, size):
+        if size in self.size_list:
+            return size
+        else:
+            return random.choice(self.size_list)
 
-            # Выводим верхнюю часть рамки
-            print('+' + '-' * (cols - 2) + '+')
+    def __str__(self):
+        return f'Это {self.material} бумага размером {self.size} цвета ({self.color}).'
 
-            # Выводим содержание бумаги
-            lines = self.content.split('\n')
-            for i in range(rows - 2):
-                line = lines[i] if i < len(lines) else ''
-                print('|' + line.ljust(cols - 2) + '|')
+    def take_damage(self, text):
+        if self.usable_area <= 0:
+            print('Бумага заполнена')
+            self.usable_area = 0
+        else:
+            self.content += text
+            self.usable_area -= len(text)
+        print(f'В бумаге осталось {self.usable_area} символов.')
+        return self
 
-            # Выводим нижнюю часть рамки
-            print('+' + '-' * (cols - 2) + '+')
+    def info(self):
+        # Подсчитываем количество строк и столбцов для вывода содержания бумаги
+        rows = int(self.size / 100) + 2  # Добавляем 2 строки для рамки
+        cols = int(self.size / 20) + 2  # Добавляем 2 столбца для рамки
 
-            # Выводим информацию о бумаге
-            print(f'Это {self.material} бумага размером {self.size} цвета ({self.color}).')
-            print(f'В бумаге осталось {self.usable_area} символов.')
+        # Выводим верхнюю часть рамки
+        print('+' + '-' * (cols - 2) + '+')
+
+        # Выводим содержание бумаги
+        lines = self.content.split('\n')
+        for i in range(rows - 2):
+            line = lines[i] if i < len(lines) else ''
+            print('|' + line.ljust(cols - 2) + '|')
+
+        # Выводим нижнюю часть рамки
+        print('+' + '-' * (cols - 2) + '+')
+
+        # Выводим информацию о бумаге
+        print(f'Это {self.material} бумага размером {self.size} цвета ({self.color}).')
+        print(f'В бумаге осталось {self.usable_area} символов.')
 
 
 class Copybook:
