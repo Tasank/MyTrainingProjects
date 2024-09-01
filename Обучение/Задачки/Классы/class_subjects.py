@@ -106,6 +106,14 @@ class Copybook:
     def sheets(self, count):
         for i in count:
             new_sheets = Paper(self.size, self.color, self.material)
+            self.sheets_list.append(new_sheets)
+    ## Сделать функцию записи, используя ручку взять ручку из пинала (создать класс где будут хранится ручки),
+    # [учесть] место у листа может закончится, [учесть] все листки могут быть
+    # заполнены, [учесть] состояние ручки,
+    def writing_notebook(self):
+        ask = input(f'Сделать запись в {self.material}? (да/нет)')
+        while ask == 'да':
+
 
 
 
@@ -163,14 +171,13 @@ class Pen:
     def mine(self):
         return self.pasta
 
-    def take_damage(self, paper, damage):
-        paper = Paper
-
-        self.pasta -= damage
-
+    def take_damage(self, damage):
+        self.pasta -= len(damage)
         if self.pasta <= 0:
             print('Ручка утеряна')
             self.pasta = 0
+            return None
+        return damage
 
     def info(self):
         print(f'Минимальное количество пасты - 0.5 граммов, максимальное - 1.2 граммов')
