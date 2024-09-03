@@ -184,6 +184,7 @@ class Pen:
         print(f'Возможный цвет ручек - {self.color_list}')
         print(f'Возможный тип ручки - {self.material_list}')
 
+class Pencil:
 
 pen_1 = Pen('1', '2', 1000)
 pen_1.info_pen()
