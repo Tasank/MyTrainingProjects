@@ -1,0 +1,48 @@
+0) Для комфортной работы с REST необходимо установить DRF.
+
+Для этого нужно выполнить команды:
+
+pip install djangorestframework
+pip install markdown
+pip install django-filter
+
+1) Для начала нам, конечно же, нужно добавить Django REST Framework в список установленных приложений.
+
+В settings.py находим список INSTALLED_APPS и добавляем в него 'rest_framework'.
+
+INSTALLED_APPS = [
+   'django.contrib.admin',
+   'django.contrib.auth',
+   'django.contrib.contenttypes',
+   'django.contrib.sessions',
+   'django.contrib.messages',
+   'django.contrib.staticfiles',
+   'education',
+   'rest_framework',
+]
+А значит, теперь мы можем его использовать в нашем проекте.
+_________________________
+2) Следующий этап — добавить сериализаторы. Для этого в папке приложения создаём файл serializers.py
+ и добавляем в него следующее содержание:
+
+from .models import *
+from rest_framework import serializers
+
+
+class SchoolSerializer(serializers.HyperlinkedModelSerializer):
+   class Meta:
+       model = School
+       fields = ['id', 'name', ]
+
+
+class SClassSerializer(serializers.HyperlinkedModelSerializer):
+   class Meta:
+       model = SClass
+       fields = ['id', 'grade', ]
+
+
+class StudentSerializer(serializers.HyperlinkedModelSerializer):
+   class Meta:
+       model = Student
+       fields = ['id', 'name', ]
+_________________________
