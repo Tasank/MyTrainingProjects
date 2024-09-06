@@ -46,3 +46,45 @@ class StudentSerializer(serializers.HyperlinkedModelSerializer):
        model = Student
        fields = ['id', 'name', ]
 _________________________
+3) Теперь, когда мы добавили сериализаторы, их нужно как-то использовать, ведь не просто так же мы их писали.
+Для этого нужно в файле views.py проекта добавить классы вьюсетов:
+
+from django.shortcuts import render
+from rest_framework import viewsets
+from rest_framework import permissions
+
+from education.serializers import *
+from education.models import *
+
+
+class SchoolViewset(viewsets.ModelViewSet):
+   queryset = School.objects.all()
+   serializer_class = SchoolSerializer
+
+
+class SClassViewset(viewsets.ModelViewSet):
+   queryset = SClass.objects.all()
+   serializer_class = SClassSerializer
+
+
+class StudentViewest(viewsets.ModelViewSet):
+   queryset = Student.objects.all()
+   serializer_class = StudentSerializer
+_________________________
+4) Раз у нас есть несколько view, которые мы хотим показать, то мы должны зарегистрировать их в urls.py для доступа.
+
+from rest_framework import routers
+from education import views
+
+
+router = routers.DefaultRouter()
+router.register(r'schools', views.SchoolViewset)
+router.register(r'classes', views.SClassViewset)
+router.register(r'students', views.StudentViewest)
+
+
+urlpatterns = [
+   path('admin/', admin.site.urls),
+   path('', include(router.urls)),
+   path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+]
