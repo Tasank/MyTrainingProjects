@@ -27,3 +27,22 @@ print(pizza.name)
 Food.close_eat()
 getattr(Food, 'close_eat')()
 print()
+
+# создание и изменение значения атрибута
+# Тест_4
+Food.name = 'Колбаса'
+Food.new_attribute = 'creation_new_attribute'
+setattr(Food, 'new_attr', 'change_new_attr')
+print(Food.new_attribute)
+print(Food.new_attr)
+print()
+
+# удаление атрибута
+# Тест_5
+del Food.new_attribute
+delattr(Food, 'new_attr')
+
+# посмотреть атрибуты класса или экземпляра
+# Тест_6
+print(Food.__dict__)
+print(pizza.__dict__)
