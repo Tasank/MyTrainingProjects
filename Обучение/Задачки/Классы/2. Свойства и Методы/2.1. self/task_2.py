@@ -21,7 +21,7 @@ class Phenomenon:
         self.variable = variable
         print(f'Мы установили значение: {self.variable}\n')
 
-    # Метод класса, который печатает сам себя
+    # Этот метод просто печатает сам экземпляр класса.
     def new_method(self):
         print(self)
 
