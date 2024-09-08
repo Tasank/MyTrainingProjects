@@ -25,10 +25,13 @@ class Warrior:
     def __str__(self):
         return (f'Имя: {max.name} \n - выносливость: {self.stamina} \n - сила: {self.strength} \n -'
                 f' ловкость: {self.agility}')
+def main():
+    max = Warrior("Максим")
+    print(max, '\n')
+    print(f'Имя: {max.name}')
+    print(f'Начальная сила: {max.strength}')
 
-max = Warrior("Максим")
-print(max, '\n')
-print(f'Имя: {max.name}')
-print(f'Начальная сила: {max.strength}')
+    max.train("сила")
 
-max.train("сила")
+if __name__ == '__main__':
+    main()
