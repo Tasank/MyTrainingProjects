@@ -2,7 +2,7 @@
 Демонстрация публичных атрибутов и методов.
 """
 class Triangle:
-    def __init__(self,a,b,c):
+    def __init__(self, a, b, c):
         self.a = a
         self.b = b
         self.c = c
