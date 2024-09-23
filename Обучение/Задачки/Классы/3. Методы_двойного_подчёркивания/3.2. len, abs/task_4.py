@@ -6,7 +6,7 @@ class MyDict:
     def __init__(self):
         self.dict = {}
 
-    def add (self, key, value):
+    def add(self, key, value):
         self.dict[key] = value
 
     def __len__(self):
