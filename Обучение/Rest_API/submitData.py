@@ -12,7 +12,7 @@ class DatabaseHandler:
         self.port = os.getenv('FSTR_DB_PORT')
         self.user = os.getenv('FSTR_DB_LOGIN')
         self.password = os.getenv('FSTR_DB_PASS')
-        self.database = 'Pereval'  # Название вашей базы данных
+        self.database = 'Pereval'  # Название базы данных
         # Создаем соединение с базой данных
         self.conn = psycopg2.connect(
             host=self.host,
@@ -23,6 +23,7 @@ class DatabaseHandler:
         )
         self.conn.autocommit = True
 
+    # Метод для добавления координат
     def add_coord(self, latitude, longitude, height):
         try:
             with self.conn.cursor() as cursor:
@@ -38,6 +39,7 @@ class DatabaseHandler:
             print(f"Ошибка при добавлении координат: {e}")
             return None
 
+    # Метод для добавления пользователя
     def add_user(self, email, fam, name, otc, phone):
         try:
             with self.conn.cursor() as cursor:
@@ -52,6 +54,8 @@ class DatabaseHandler:
         except Exception as e:
             print(f"Ошибка при добавлении пользователя: {e}")
             return None
+
+    # Метод для добавления перевала
     def add_pereval(self, beauty_title, title, other_titles, connect, add_time, user_id, coord_id, level_winter, level_summer, level_autumn, level_spring):
         try:
             with self.conn.cursor() as cursor:
@@ -67,6 +71,7 @@ class DatabaseHandler:
             print(f"Ошибка при добавлении перевала: {e}")
             return None
 
+    # Метод для проверки существования пользователя по email
     def check_user_exists(self, email):
         try:
             with self.conn.cursor() as cursor:
@@ -84,8 +89,6 @@ class DatabaseHandler:
     def close(self):
         self.conn.close()
 
-# добавить новую запись в таблицу users с id равным 1:
-
 
 # Пример использования
 if __name__ == "__main__":
@@ -96,14 +99,18 @@ if __name__ == "__main__":
     os.environ['FSTR_DB_PASS'] = '1234'
 
     db_handler = DatabaseHandler()
-
+    # узнать существует ли пользователь
     email = 'example@example.com'
     if not db_handler.check_user_exists(email):
+        # Пример добавления нового пользователя
         user_id = db_handler.add_user(email, 'Иван', 'Иванов', 'Иванович', '+7 123 456 78 90')
+        # Если пользователь успешно добавлен
         if user_id:
+            # То добавляем координаты
             coord_id = db_handler.add_coord(45.0, 30.0, 1000)
+            # Если координаты успешно добавлены
             if coord_id:
-                # Пример добавления нового перевала
+                # То добавляем перевал
                 pereval_id = db_handler.add_pereval(
                     beauty_title="пер. ",
                     title="Пхия",
@@ -123,4 +130,4 @@ if __name__ == "__main__":
     else:
         print(f"Пользователь с электронной почтой {email} уже существует.")
 
-db_handler.close()
+    db_handler.close()
