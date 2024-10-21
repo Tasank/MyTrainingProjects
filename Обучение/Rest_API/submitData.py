@@ -1,133 +1,150 @@
-# pip install psycopg2-binary
-import os
-import psycopg2
-from psycopg2 import sql
+from flask import Flask, request, jsonify
 
-# Класс для работы с базой данных
-class DatabaseHandler:
+from Обучение.Rest_API.DatabaseHandler import DatabaseHandler
 
-    def __init__(self):
-        # Получаем параметры соединения из переменных окружения
-        self.host = os.getenv('FSTR_DB_HOST')
-        self.port = os.getenv('FSTR_DB_PORT')
-        self.user = os.getenv('FSTR_DB_LOGIN')
-        self.password = os.getenv('FSTR_DB_PASS')
-        self.database = 'Pereval'  # Название базы данных
-        # Создаем соединение с базой данных
-        self.conn = psycopg2.connect(
-            host=self.host,
-            port=self.port,
-            user=self.user,
-            password=self.password,
-            database=self.database
-        )
-        self.conn.autocommit = True
+# Создание приложения Flask
+app = Flask(__name__)
 
-    # Метод для добавления координат
-    def add_coord(self, latitude, longitude, height):
+# Создание экземпляра DatabaseHandler
+db_handler = DatabaseHandler()
+
+
+# Определение маршрута для обработки POST-запросов
+@app.route('/submitData', methods=['POST'])
+def submit_data():
+    try:
+        # Получение данных из запроса
+        data = request.json
+
+        # Проверка типа данных
+        if not isinstance(data, dict):
+            # Возвращение ошибки, если данные не являются словарем
+            return jsonify(status=400, message="Неверный формат данных"), 400
+
+        # Определение обязательных полей
+        required_fields = ['beauty_title', 'title', 'add_time', 'user', 'coords', 'level', 'images']
+
+        # Проверка обязательных полей
+        for field in required_fields:
+            if field not in data:
+                # Возвращение ошибки, если обязательное поле отсутствует
+                return jsonify(status=400, message=f"Отсутствует обязательное поле {field}"), 400
+
+        # Получение информации о пользователе
+        user_info = data.get('user', {})
+
+        # Проверка типа данных
+        if not isinstance(user_info, dict):
+            # Возвращение ошибки, если данные не являются словарем
+            return jsonify(status=400, message="Неверный формат информации о пользователе"), 400
+
+        # Определение обязательных полей для пользователя
+        required_user_fields = ['email', 'fam', 'name', 'otc', 'phone']
+
+        # Проверка обязательных полей для пользователя
+        for field in required_user_fields:
+            if field not in user_info:
+                # Возвращение ошибки, если обязательное поле отсутствует
+                return jsonify(status=400, message=f"Отсутствует обязательное поле {field} в информации о пользователе"), 400
+
+        # Получение координат
+        coords = data.get('coords', {})
+
+        # Проверка типа данных
+        if not isinstance(coords, dict):
+            # Возвращение ошибки, если данные не являются словарем
+            return jsonify(status=400, message="Неверный формат координат"), 400
+
+        # Определение обязательных полей для координат
+        required_coords_fields = ['latitude', 'longitude', 'height']
+
+        # Проверка обязательных полей для координат
+        for field in required_coords_fields:
+            if field not in coords:
+                # Возвращение ошибки, если обязательное поле отсутствует
+                return jsonify(status=400, message=f"Отсутствует обязательное поле {field} в координатах"), 400
+
+        # Получение уровня
+        level = data.get('level', {})
+
+        # Проверка типа данных
+        if not isinstance(level, dict):
+            # Возвращение ошибки, если данные не являются словарем
+            return jsonify(status=400, message="Неверный формат уровня"), 400
+
+        # Определение обязательных полей для уровня
+        required_level_fields = ['winter', 'summer', 'autumn', 'spring']
+
+        # Проверка обязательных полей для уровня
+        for field in required_level_fields:
+            if field not in level:
+                # Возвращение ошибки, если обязательное поле отсутствует
+                return jsonify(status=400, message=f"Отсутствует обязательное поле {field} в уровне"), 400
+
+        # Получение изображений
+        images = data.get('images', [])
+
+        # Проверка типа данных
+        if not isinstance(images, list) or not all(isinstance(image, dict) for image in images):
+            # Возвращение ошибки, если данные не являются списком словарей
+            return jsonify(status=400, message="Изображения должны быть списком словарей"), 400
+
         try:
-            with self.conn.cursor() as cursor:
-                query = sql.SQL("""
-                INSERT INTO coords (latitude, longitude, height)
-                VALUES (%s, %s, %s)
-                RETURNING id;
-                """)
-                cursor.execute(query, (latitude, longitude, height))
-                coord_id = cursor.fetchone()[0]
-                return coord_id
-        except Exception as e:
-            print(f"Ошибка при добавлении координат: {e}")
-            return None
+            # Проверка существования пользователя
+            if db_handler.check_user_exists(user_info.get('email')):
+                # Возвращение ошибки, если пользователь уже существует
+                return jsonify(status=400, message="Пользователь уже существует"), 400
 
-    # Метод для добавления пользователя
-    def add_user(self, email, fam, name, otc, phone):
-        try:
-            with self.conn.cursor() as cursor:
-                query = sql.SQL("""
-                INSERT INTO users (email, fam, name, otc, phone)
-                VALUES (%s, %s, %s, %s, %s)
-                RETURNING id;
-                """)
-                cursor.execute(query, (email, fam, name, otc, phone))
-                user_id = cursor.fetchone()[0]
-                return user_id
-        except Exception as e:
-            print(f"Ошибка при добавлении пользователя: {e}")
-            return None
+            # Добавление пользователя
+            user_id = db_handler.add_user(
+                user_info.get('email'),
+                user_info.get('fam'),
+                user_info.get('name'),
+                user_info.get('otc'),
+                user_info.get('phone')
+            )
 
-    # Метод для добавления перевала
-    def add_pereval(self, beauty_title, title, other_titles, connect, add_time, user_id, coord_id, level_winter, level_summer, level_autumn, level_spring):
-        try:
-            with self.conn.cursor() as cursor:
-                query = sql.SQL("""
-                INSERT INTO pereval_added (beauty_title, title, other_titles, connect, add_time, user_id, coord_id, level_winter, level_summer, level_autumn, level_spring)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                RETURNING id;
-                """)
-                cursor.execute(query, (beauty_title, title, other_titles, connect, add_time, user_id, coord_id, level_winter, level_summer, level_autumn, level_spring))
-                pereval_id = cursor.fetchone()[0]
-                return pereval_id
-        except Exception as e:
-            print(f"Ошибка при добавлении перевала: {e}")
-            return None
+            # Добавление координат
+            coord_id = db_handler.add_coord(
+                coords.get('latitude'),
+                coords.get('longitude'),
+                coords.get('height')
+            )
 
-    # Метод для проверки существования пользователя по email
-    def check_user_exists(self, email):
-        try:
-            with self.conn.cursor() as cursor:
-                query = sql.SQL("""
-                SELECT * FROM users
-                WHERE email = %s;
-                """)
-                cursor.execute(query, (email,))
-                user = cursor.fetchone()
-                return user is not None
-        except Exception as e:
-            print(f"Ошибка при проверке существования пользователя: {e}")
-            return False
+            # Добавление перевала
+            pereval_id = db_handler.add_pereval(
+                beauty_title=data.get('beauty_title'),
+                title=data.get('title'),
+                other_titles=data.get('other_titles', ""),
+                connect=data.get('connect', ""),
+                add_time=data.get('add_time'),
+                user_id=user_id,
+                coord_id=coord_id,
+                level_winter=level.get('winter'),
+                level_summer=level.get('summer'),
+                level_autumn=level.get('autumn'),
+                level_spring=level.get('spring')
+            )
 
-    def close(self):
-        self.conn.close()
-
-
-# Пример использования
-if __name__ == "__main__":
-    # Устанавливаем значения переменных окружения
-    os.environ['FSTR_DB_HOST'] = 'localhost'
-    os.environ['FSTR_DB_PORT'] = '5432'
-    os.environ['FSTR_DB_LOGIN'] = 'postgres'
-    os.environ['FSTR_DB_PASS'] = '1234'
-
-    db_handler = DatabaseHandler()
-    # узнать существует ли пользователь
-    email = 'example@example.com'
-    if not db_handler.check_user_exists(email):
-        # Пример добавления нового пользователя
-        user_id = db_handler.add_user(email, 'Иван', 'Иванов', 'Иванович', '+7 123 456 78 90')
-        # Если пользователь успешно добавлен
-        if user_id:
-            # То добавляем координаты
-            coord_id = db_handler.add_coord(45.0, 30.0, 1000)
-            # Если координаты успешно добавлены
-            if coord_id:
-                # То добавляем перевал
-                pereval_id = db_handler.add_pereval(
-                    beauty_title="пер. ",
-                    title="Пхия",
-                    other_titles="Триев",
-                    connect="",
-                    add_time="2021-09-22 13:18:13",
-                    user_id=user_id,
-                    coord_id=coord_id,
-                    level_winter="",
-                    level_summer="1А",
-                    level_autumn="1А",
-                    level_spring=""
+            # Добавление изображений
+            for image in images:
+                image_id = db_handler.add_image(
+                    image.get('data'),
+                    image.get('title'),
+                    pereval_id
                 )
+                # Если не удалось добавить изображение, то возвращаем ошибку
+                if image_id is None:
+                    return jsonify(status=500, message="Ошибка при добавлении изображения"), 500
 
-                if pereval_id:
-                    print(f"Перевал успешно добавлен: {pereval_id}")
-    else:
-        print(f"Пользователь с электронной почтой {email} уже существует.")
+            if pereval_id is not None:
+                return jsonify(status=200, id=pereval_id, message="Отправлено успешно"), 200
+            else:
+                return jsonify(status=500, message="Ошибка при добавлении перевала"), 500
+        except Exception as e:
+            return jsonify(status=500, message=f"Внутренняя ошибка {e}"), 500
+    except Exception as e:
+        return jsonify(status=500, message=f"Внутренняя ошибка {e}"), 500
 
-    db_handler.close()
+if __name__ == '__main__':
+    app.run(debug=True)
