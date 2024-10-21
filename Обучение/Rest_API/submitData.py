@@ -131,4 +131,3 @@ if __name__ == "__main__":
         print(f"Пользователь с электронной почтой {email} уже существует.")
 
     db_handler.close()
-fhjdthrf
