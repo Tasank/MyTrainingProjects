@@ -9,7 +9,7 @@ app = Flask(__name__)
 db_handler = DatabaseHandler()
 
 
-# Определение маршрута для обработки POST-запросов
+# Маршрута для обработки POST-запросов
 @app.route('/submitData', methods=['POST'])
 def submit_data():
     try:
@@ -123,7 +123,8 @@ def submit_data():
                 level_winter=level.get('winter'),
                 level_summer=level.get('summer'),
                 level_autumn=level.get('autumn'),
-                level_spring=level.get('spring')
+                level_spring=level.get('spring'),
+                status='new'
             )
 
             # Добавление изображений
@@ -145,6 +146,33 @@ def submit_data():
             return jsonify(status=500, message=f"Внутренняя ошибка {e}"), 500
     except Exception as e:
         return jsonify(status=500, message=f"Внутренняя ошибка {e}"), 500
+
+# Этот метод должен возвращать информацию о записи по её id.
+# Он будет извлекать данные из базы данных и возвращать их в формате JSON.
+@app.route('/submitData/<int:id>', methods=['GET'])
+def get_submit_data(id):
+    try:
+        record = db_handler.get_pereval_by_id(id)
+        if record:
+            return jsonify(status=200, data=record), 200
+        else:
+            return jsonify(status=404, message="Запись не найдена"), 404
+    except Exception as e:
+        return jsonify(status=500, message=f"Внутренняя ошибка {e}"), 500
+
+# Этот метод должен обновлять данные записи по её id.
+@app.route('/submitData/<int:id>', methods=['PATCH'])
+def patch_submit_data(id):
+    try:
+        data = request.json
+        result = db_handler.update_pereval(id, data)
+        if result['state'] == 1:
+            return jsonify(status=200, message="Запись успешно обновлена"), 200
+        else:
+            return jsonify(status=400, message=result['message']), 400
+    except Exception as e:
+        return jsonify(status=500, message=f"Внутренняя ошибка {e}"), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)

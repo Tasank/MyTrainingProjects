@@ -80,6 +80,7 @@ class DatabaseHandler:
             print(f"Ошибка при добавлении перевала: {e}")
             return None
 
+    # Метод для добавления изображения
     def add_image(self, image_data, image_title, pereval_id):
         try:
             with self.conn.cursor() as cursor:
@@ -95,8 +96,7 @@ class DatabaseHandler:
             print(f"Ошибка при добавлении изображения: {e}")
             return None
 
-
-
+    # Метод для проверки существования пользователя
     def check_user_exists(self, email):
         try:
             with self.conn.cursor() as cursor:
@@ -110,6 +110,67 @@ class DatabaseHandler:
         except psycopg2.Error as e:
             print(f"Ошибка при проверке существования пользователя: {e}")
             return False
+
+    # Метод для получения перевала по его ID
+    def get_pereval_by_id(self, pereval_id):
+        try:
+            with self.conn.cursor() as cursor:
+                query = sql.SQL("SELECT * FROM pereval_added WHERE id = %s;")
+                cursor.execute(query, (pereval_id,))
+                record = cursor.fetchone()
+                return record
+        except Exception as e:
+            print(f"Ошибка при получении перевала: {e}")
+            return None
+
+    # Метод для обновления перевала
+    def update_pereval(self, pereval_id, data):
+        try:
+            with self.conn.cursor() as cursor:
+                # Проверяем статус, чтобы разрешить редактирование только если статус new
+                cursor.execute("SELECT status FROM pereval_added WHERE id = %s;", (pereval_id,))
+                status = cursor.fetchone()[0]
+                if status != 'new':
+                    return {'state': 0, 'message': 'Редактирование возможно только для записей со статусом new'}
+
+                # Подготовка запроса на обновление
+                update_query = sql.SQL("""
+                    UPDATE pereval_added
+                    SET beauty_title = %s, title = %s, other_titles = %s, connect = %s, add_time = %s,
+                        level_winter = %s, level_summer = %s, level_autumn = %s, level_spring = %s
+                    WHERE id = %s
+                """)
+                cursor.execute(update_query, (
+                    data.get('beauty_title'),
+                    data.get('title'),
+                    data.get('other_titles', ""),
+                    data.get('connect', ""),
+                    data.get('add_time'),
+                    data.get('level', {}).get('winter'),
+                    data.get('level', {}).get('summer'),
+                    data.get('level', {}).get('autumn'),
+                    data.get('level', {}).get('spring'),
+                    pereval_id
+                ))
+                return {'state': 1, 'message': 'Запись успешно обновлена'}
+        except Exception as e:
+            print(f"Ошибка при обновлении перевала: {e}")
+            return {'state': 0, 'message': f"Ошибка при обновлении: {e}"}
+
+    # Метод для получения перевалов по email пользователя
+    def get_submissions_by_user_email(self, email):
+        try:
+            with self.conn.cursor() as cursor:
+                query = sql.SQL("""
+                    SELECT * FROM pereval_added
+                    WHERE user_id = (SELECT id FROM users WHERE email = %s)
+                    """)
+                cursor.execute(query, (email,))
+                records = cursor.fetchall()
+                return records
+        except Exception as e:
+            print(f"Ошибка при получении данных пользователя: {e}")
+            return []
 
     def close(self):
         self.conn.close()
@@ -142,7 +203,8 @@ if __name__ == "__main__":
                     level_winter="",
                     level_summer="1А",
                     level_autumn="1А",
-                    level_spring=""
+                    level_spring="",
+                    status="new"
                 )
 
                 if pereval_id:
