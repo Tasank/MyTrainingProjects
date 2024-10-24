@@ -98,6 +98,7 @@
 | test_submit_data | PASSED |
 | test_get_submit_data | PASSED |
 | test_patch_submit_data | PASSED |
+
 #### Пример вывода:
 ![Результаты тестирования](test_1.png)
 
