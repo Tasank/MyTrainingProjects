@@ -108,12 +108,12 @@ class DatabaseHandler:
             with self.conn.cursor() as cursor:
                 query = sql.SQL("""
                 INSERT INTO pereval_added (beauty_title, title, other_titles, connect, add_time, user_id, coord_id, level_winter, level_summer, level_autumn, level_spring, status)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 RETURNING id;
                 """)
                 cursor.execute(query, (
                     beauty_title, title, other_titles, connect, add_time, user_id, coord_id, level_winter, level_summer,
-                    level_autumn, level_spring))
+                    level_autumn, level_spring, status))
                 pereval_id = cursor.fetchone()[0]
                 return pereval_id
         except psycopg2.Error as e:

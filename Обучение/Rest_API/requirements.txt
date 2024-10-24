@@ -1,0 +1,4 @@
+pytest==8.3.3
+flasgger==0.9.7.1
+psycopg2-binary==2.9.9
+requests==2.31.0
