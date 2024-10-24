@@ -1,0 +1,32 @@
+{
+  "beauty_title": "Новый Перевал",
+  "title": "Тестовый Маршрут",
+  "other_titles": "",
+  "connect": "",
+  "add_time": "2023-03-01 12:00:00",
+  "user": {
+    "email": "test7@example.com",
+    "fam": "Иванов",
+    "name": "Иван",
+    "otc": "Иванович",
+    "phone": "+7 123 456 78 90"
+  },
+  "coords": {
+    "latitude": 55.0,
+    "longitude": 45.0,
+    "height": 1000
+  },
+  "level": {
+    "winter": "",
+    "summer": "2А",
+    "autumn": "2А",
+    "spring": ""
+  },
+  "images": [
+    {
+      "id": 5,
+      "title": "Ф изображение",
+      "data": "base64_encoded_image_data"
+    }
+  ]
+}

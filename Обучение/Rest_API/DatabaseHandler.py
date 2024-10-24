@@ -1,11 +1,14 @@
 # pip install psycopg2-binary
 import os
+
 import psycopg2
 from psycopg2 import sql
 
 
-# Класс для работы с базой данных
 class DatabaseHandler:
+    """
+    Класс для работы с базой данных Pereval.
+    """
     # Устанавливаем значения переменных окружения
     os.environ['FSTR_DB_HOST'] = 'localhost'
     os.environ['FSTR_DB_PORT'] = '5432'
@@ -13,13 +16,15 @@ class DatabaseHandler:
     os.environ['FSTR_DB_PASS'] = '1234'
 
     def __init__(self):
-        # Получаем параметры соединения из переменных окружения
+        """
+        Инициализация соединения с базой данных.
+        Устанавливает соединение с использованием параметров из переменных окружения.
+        """
         self.host = os.getenv('FSTR_DB_HOST')
         self.port = os.getenv('FSTR_DB_PORT')
         self.user = os.getenv('FSTR_DB_LOGIN')
         self.password = os.getenv('FSTR_DB_PASS')
         self.database = 'Pereval'  # Название базы данных
-        # Создаем соединение с базой данных
         self.conn = psycopg2.connect(
             host=self.host,
             port=self.port,
@@ -29,8 +34,16 @@ class DatabaseHandler:
         )
         self.conn.autocommit = True
 
-    # Метод для добавления координат
+
     def add_coord(self, latitude, longitude, height):
+        """
+        Добавляет координаты в базу данных.
+
+        :param latitude: Широта.
+        :param longitude: Долгота.
+        :param height: Высота.
+        :return: ID добавленных координат или None в случае ошибки.
+        """
         try:
             with self.conn.cursor() as cursor:
                 query = sql.SQL("""
@@ -45,8 +58,18 @@ class DatabaseHandler:
             print(f"Ошибка при добавлении координат: {e}")
             return None
 
-    # Метод для добавления пользователя
+
     def add_user(self, email, fam, name, otc, phone):
+        """
+        Добавляет пользователя в базу данных.
+
+        :param email: Электронная почта пользователя.
+        :param fam: Фамилия пользователя.
+        :param name: Имя пользователя.
+        :param otc: Отчество пользователя.
+        :param phone: Телефон пользователя.
+        :return: ID добавленного пользователя или None в случае ошибки.
+        """
         try:
             with self.conn.cursor() as cursor:
                 query = sql.SQL("""
@@ -61,9 +84,26 @@ class DatabaseHandler:
             print(f"Ошибка при добавлении пользователя: {e}")
             return None
 
-    # Метод для добавления перевала
+
     def add_pereval(self, beauty_title, title, other_titles, connect, add_time, user_id, coord_id, level_winter,
                     level_summer, level_autumn, level_spring, status):
+        """
+        Добавляет информацию о перевале в базу данных.
+
+        :param beauty_title: Красивое название перевала.
+        :param title: Название перевала.
+        :param other_titles: Другие названия перевала.
+        :param connect: Связь перевала.
+        :param add_time: Время добавления.
+        :param user_id: ID пользователя.
+        :param coord_id: ID координат.
+        :param level_winter: Уровень сложности зимой.
+        :param level_summer: Уровень сложности летом.
+        :param level_autumn: Уровень сложности осенью.
+        :param level_spring: Уровень сложности весной.
+        :param status: Статус перевала.
+        :return: ID добавленного перевала или None в случае ошибки.
+        """
         try:
             with self.conn.cursor() as cursor:
                 query = sql.SQL("""
@@ -80,8 +120,16 @@ class DatabaseHandler:
             print(f"Ошибка при добавлении перевала: {e}")
             return None
 
-    # Метод для добавления изображения
+
     def add_image(self, image_data, image_title, pereval_id):
+        """
+        Добавляет изображение к перевалу.
+
+        :param image_data: Данные изображения.
+        :param image_title: Название изображения.
+        :param pereval_id: ID перевала.
+        :return: ID добавленного изображения или None в случае ошибки.
+        """
         try:
             with self.conn.cursor() as cursor:
                 query = sql.SQL("""
@@ -96,8 +144,13 @@ class DatabaseHandler:
             print(f"Ошибка при добавлении изображения: {e}")
             return None
 
-    # Метод для проверки существования пользователя
     def check_user_exists(self, email):
+        """
+        Проверяет существование пользователя в базе данных по электронной почте.
+
+        :param email: Электронная почта пользователя.
+        :return: True, если пользователь существует, иначе False.
+        """
         try:
             with self.conn.cursor() as cursor:
                 query = sql.SQL("""
@@ -111,11 +164,17 @@ class DatabaseHandler:
             print(f"Ошибка при проверке существования пользователя: {e}")
             return False
 
-    # Метод для получения перевала по его ID
     def get_pereval_by_id(self, pereval_id):
+        """
+        Получает информацию о перевале по его ID.
+
+        :param pereval_id: ID перевала.
+        :return: Данные перевала или None в случае ошибки.
+        """
         try:
             with self.conn.cursor() as cursor:
-                query = sql.SQL("SELECT * FROM pereval_added WHERE id = %s;")
+                query = sql.SQL(
+                    "SELECT id, beauty_title, title, other_titles, connect, add_time, user_id, coord_id, level_winter, level_summer, level_autumn, level_spring, status FROM pereval_added WHERE id = %s;")
                 cursor.execute(query, (pereval_id,))
                 record = cursor.fetchone()
                 return record
@@ -123,8 +182,14 @@ class DatabaseHandler:
             print(f"Ошибка при получении перевала: {e}")
             return None
 
-    # Метод для обновления перевала
     def update_pereval(self, pereval_id, data):
+        """
+        Обновляет информацию о перевале.
+
+        :param pereval_id: ID перевала.
+        :param data: Данные для обновления.
+        :return: Словарь с состоянием обновления и сообщением.
+        """
         try:
             with self.conn.cursor() as cursor:
                 # Проверяем статус, чтобы разрешить редактирование только если статус new
@@ -157,8 +222,14 @@ class DatabaseHandler:
             print(f"Ошибка при обновлении перевала: {e}")
             return {'state': 0, 'message': f"Ошибка при обновлении: {e}"}
 
-    # Метод для получения перевалов по email пользователя
+
     def get_submissions_by_user_email(self, email):
+        """
+        Получает все перевалы, добавленные пользователем по его электронной почте.
+
+        :param email: Электронная почта пользователя.
+        :return: Список перевалов или пустный список в случае ошибки.
+        """
         try:
             with self.conn.cursor() as cursor:
                 query = sql.SQL("""
@@ -173,6 +244,9 @@ class DatabaseHandler:
             return []
 
     def close(self):
+        """
+        Закрывает соединение с базой данных.
+        """
         self.conn.close()
 
 

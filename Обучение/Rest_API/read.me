@@ -1,0 +1,65 @@
+Примеры тестов:
+
+1) Пример ошибки поиска изображения.
+
+Запрос:
+curl -X POST -H "Content-Type: application/json" -d "{\"beauty_title\": \"Перевал\", \"title\": \"Тестовый Перевал\", \"other_titles\": \"\", \"connect\": \"\", \"add_time\": \"2021-09-22 13:18:13\", \"user\": {\"email\": \"unique_email@example.com\", \"fam\": \"Новиков\", \"name\": \"Алексей\", \"otc\": \"Алексеевич\", \"phone\": \"+7 987 654 32 10\"}, \"coords\": {\"latitude\": 50.0, \"longitude\": 40.0, \"height\": 1500}, \"level\": {\"winter\": \"\", \"summer\": \"1Б\", \"autumn\": \"1Б\", \"spring\": \"\"}, \"images\": [{\"data\": \"<base64_encoded_image_data>\", \"title\": \"Тестовое изображение\"}]}" http://127.0.0.1:5000/submitData
+
+Ответ:
+Не удается найти указанный файл.
+
+2) Пример успешного запроса, но без изображения.
+
+Запрос:
+curl -X POST -H "Content-Type: application/json; charset=utf-8" -d @C:\Users\Валентина\PycharmProjects\Tasks\Обучение\Rest_API\test.json http://127.0.0.1:5000/submitData
+
+(Виртуальная машина, Yandex Cloud)
+2)curl -X POST  -d @test.json http://192.0.2.1:5000/submitData
+
+Ответ:
+{
+  "message": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u043e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0435 \u043f\u043e\u043b\u0435 images",
+  "status": 400
+}
+
+3) Пример успешного запроса GET получения информации по ID
+
+Запрос:
+1)curl -X GET -H "Content-Type: application/json" http://127.0.0.1:5000/submitData/5
+
+(Виртуальная машина, Yandex Cloud)
+2)curl -X GET http://192.0.2.1:5000/submitData/5
+
+Ответ:
+{
+  "data": {
+    "add_time": "Wed, 01 Mar 2023 12:00:00 GMT",
+    "beauty_title": "\u041d\u043e\u0432\u044b\u0439 \u041f\u0435\u0440\u0435\u0432\u0430\u043b",
+    "connect": "",
+    "coord_id": 1,
+    "id": 5,
+    "level": {
+      "autumn": "2\u0410",
+      "spring": "",
+      "summer": "2\u0410",
+      "winter": ""
+    },
+    "other_titles": "",
+    "status": "new",
+    "title": "\u0422\u0435\u0441\u0442\u043e\u0432\u044b\u0439 \u041c\u0430\u0440\u0448\u0440\u0443\u0442",
+    "user_id": 3
+  },
+  "status": 200
+}
+
+4) Пример успешного запроса PATCH обновления данных
+
+Запрос:
+--- Нужно указать абсолютный путь к файлу JSON (после @)---
+curl -X PATCH -H "Content-Type: application/json" -d @test.json http://127.0.0.1:5000/submitData/5
+
+Ответ:
+{
+  "message": "\u0417\u0430\u043f\u0438\u0441\u044c \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0430",
+  "status": 200
+}

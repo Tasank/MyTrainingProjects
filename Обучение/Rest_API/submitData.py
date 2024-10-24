@@ -1,17 +1,90 @@
-from flask import Flask, request, jsonify
+from datetime import datetime
 
+from flask import Flask, request, jsonify
+from flasgger import Swagger
 from Обучение.Rest_API.DatabaseHandler import DatabaseHandler
 
 # Создание приложения Flask
 app = Flask(__name__)
 
+# Инициализация Swagger
+swagger = Swagger(app)
+
 # Создание экземпляра DatabaseHandler
 db_handler = DatabaseHandler()
 
 
-# Маршрута для обработки POST-запросов
+
 @app.route('/submitData', methods=['POST'])
 def submit_data():
+    """
+    Обработка данных перевала
+    ----
+       tags:
+         - Pereval
+       parameters:
+         - in: body
+           name: body
+           schema:
+             type: object
+             properties:
+               beauty_title:
+                 type: string
+               title:
+                 type: string
+               add_time:
+                 type: string
+                 format: date-time
+               user:
+                 type: object
+                 properties:
+                   email:
+                     type: string
+                   fam:
+                     type: string
+                   name:
+                     type: string
+                   otc:
+                     type: string
+                   phone:
+                     type: string
+               coords:
+                 type: object
+                 properties:
+                   latitude:
+                     type: number
+                   longitude:
+                     type: number
+                   height:
+                     type: number
+               level:
+                 type: object
+                 properties:
+                   winter:
+                     type: string
+                   summer:
+                     type: string
+                   autumn:
+                     type: string
+                   spring:
+                     type: string
+               images:
+                 type: array
+                 items:
+                   type: object
+                   properties:
+                     data:
+                       type: string
+                     title:
+                       type: string
+       responses:
+         200:
+           description: Данные успешно отправлены
+         400:
+           description: Неверный формат данных
+         500:
+           description: Внутренняя ошибка сервера
+    """
     try:
         # Получение данных из запроса
         data = request.json
@@ -45,7 +118,8 @@ def submit_data():
         for field in required_user_fields:
             if field not in user_info:
                 # Возвращение ошибки, если обязательное поле отсутствует
-                return jsonify(status=400, message=f"Отсутствует обязательное поле {field} в информации о пользователе"), 400
+                return jsonify(status=400,
+                               message=f"Отсутствует обязательное поле {field} в информации о пользователе"), 400
 
         # Получение координат
         coords = data.get('coords', {})
@@ -147,22 +221,145 @@ def submit_data():
     except Exception as e:
         return jsonify(status=500, message=f"Внутренняя ошибка {e}"), 500
 
-# Этот метод должен возвращать информацию о записи по её id.
-# Он будет извлекать данные из базы данных и возвращать их в формате JSON.
+
+
 @app.route('/submitData/<int:id>', methods=['GET'])
 def get_submit_data(id):
+    """
+    Получение данных перевала по ID
+    ---
+    tags:
+      - Pereval
+    parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true
+        description: ID перевала для получения данных
+    responses:
+      200:
+        description: Данные перевала успешно получены
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+            data:
+              type: object
+              properties:
+                id:
+                  type: integer
+                beauty_title:
+                  type: string
+                title:
+                  type: string
+                other_titles:
+                  type: string
+                connect:
+                  type: string
+                add_time:
+                  type: string
+                  format: date-time
+                user_id:
+                  type: integer
+                coord_id:
+                  type: integer
+                level:
+                  type: object
+                  properties:
+                    winter:
+                      type: string
+                    summer:
+                      type: string
+                    autumn:
+                      type: string
+                    spring:
+                      type: string
+                status:
+                  type: string
+      404:
+        description: Запись не найдена
+      500:
+        description: Внутренняя ошибка сервера
+    """
     try:
         record = db_handler.get_pereval_by_id(id)
         if record:
-            return jsonify(status=200, data=record), 200
+            # Формирование ответа с правильным форматированием даты
+            response_data = {
+                "id": record[0],  # ID перевала
+                "beauty_title": record[1],  # Красивое название
+                "title": record[2],  # Заголовок
+                "other_titles": record[3],  # Другие названия
+                "connect": record[4],  # Связь
+                "add_time": record[5].strftime("%a, %d %b %Y %H:%M:%S GMT") if isinstance(record[5], datetime) else
+                record[5],  # Форматирование времени
+                "user_id": record[6],  # ID пользователя
+                "coord_id": record[7],  # ID координат
+                "level": {
+                    "winter": record[8],  # Уровень зимы
+                    "summer": record[9],  # Уровень лета
+                    "autumn": record[10],  # Уровень осени
+                    "spring": record[11]  # Уровень весны
+                },
+                "status": record[12]  # Статус
+            }
+            return jsonify(status=200, data=response_data), 200
         else:
             return jsonify(status=404, message="Запись не найдена"), 404
     except Exception as e:
         return jsonify(status=500, message=f"Внутренняя ошибка {e}"), 500
 
-# Этот метод должен обновлять данные записи по её id.
+
+
 @app.route('/submitData/<int:id>', methods=['PATCH'])
 def patch_submit_data(id):
+    """
+    Обновление данных перевала по ID
+    ---
+    tags:
+      - Pereval
+    parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true
+        description: ID перевала для обновления данных
+      - in: body
+        name: body
+        schema:
+          type: object
+          properties:
+            beauty_title:
+              type: string
+            title:
+              type: string
+            other_titles:
+              type: string
+            connect:
+              type: string
+            add_time:
+              type: string
+              format: date-time
+            level:
+              type: object
+              properties:
+                winter:
+                  type: string
+                summer:
+                  type: string
+                autumn:
+                  type: string
+                spring:
+                  type: string
+    responses:
+      200:
+        description: Запись успешно обновлена
+      400:
+        description: Ошибка в данных запроса
+      500:
+        description: Внутренняя ошибка сервера
+    """
     try:
         data = request.json
         result = db_handler.update_pereval(id, data)
