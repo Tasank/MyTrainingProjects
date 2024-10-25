@@ -13,7 +13,7 @@
 * `tests`: Директория для с тестами API и класса DatabaseHandler
 * `submitData.py`: методы API 
 * `test_1.png`: пример вывода теста API
-* `read.me`: примеры вызова REST API с хостинга Yandex Cloud
+* `read.me`: примеры вызова REST API curl
 
 ## Методы API
 
