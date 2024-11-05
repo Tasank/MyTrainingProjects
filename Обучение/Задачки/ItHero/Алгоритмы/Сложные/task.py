@@ -1,11 +1,47 @@
 """
-Необходимо реализовать функцию get_common_elements, которая на вход принимает два списка lst1 и lst2 чисел,
-и возвращает новый список, содержащий только общие элементы, которые встречаются и в первом, и во втором списке.
+Разбивка по словам
+Вам дана строка s и список words. Добавьте пробелы в s таким образом,
+чтобы составить из исходной строки предложение, где каждое слово будет словом из списка words.
+Напишите функцию wordBreak, которая вернет список всех возможных предложений.
+Если из списка words нельзя составить строку s - верните пустой список.
 """
-lst1 = [4]
-lst2 = [1, 2, 3]
-def get_common_elements(lst1, lst2):
-    new_lst = set(lst1) & set(lst2)
-    return list(new_lst)
+s = "catsanddog"
+words = ["cat", "cats", "and", "sand", "dog"]
 
-print(get_common_elements(lst1, lst2))
+
+def wordBreak(s, words):
+    def backtrack(start):
+        if start == len(s):
+            return [[]]  # Вернули пустой список, представляющий полное предложение
+
+        if start in memo:
+            return memo[start]
+
+        result = []
+        for end in range(start + 1, len(s) + 1):
+            word = s[start:end]
+            if word in words_set:
+                for sublist in backtrack(end):
+                    result.append([word] + sublist)
+
+        memo[start] = result
+        return result
+
+    words_set = set(words)
+    memo = {}
+    word_lists = backtrack(0)
+    return [" ".join(words) for words in word_lists]
+
+
+# Примеры использования
+s1 = "catsanddog"
+words1 = ["cat", "cats", "and", "sand", "dog"]
+print(wordBreak(s1, words1))  # ["cats and dog","cat sand dog"]
+
+s2 = "pineapplepenapple"
+words2 = ["apple", "pen", "applepen", "pine", "pineapple"]
+print(wordBreak(s2, words2))  # ["pine apple pen apple","pineapple pen apple","pine applepen apple"]
+
+s3 = "catsandog"
+words3 = ["cats", "dog", "sand", "and", "cat"]
+print(wordBreak(s3, words3))  # []
