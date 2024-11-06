@@ -9,8 +9,8 @@ s = "catsanddog"
 words = ["cat", "cats", "and", "sand", "dog"]
 
 
-def wordBreak(s, words):
-    def backtrack(start):
+def wordBreak(s, words) -> list:
+    def backtrack(start) -> list:
         if start == len(s):
             return [[]]  # Вернули пустой список, представляющий полное предложение
 
