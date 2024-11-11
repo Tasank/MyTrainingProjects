@@ -24,11 +24,12 @@ class Circle:
     def get_perimeter(self):
         return 2 * 3.14 * self.radius
 
-r = Rectangle(5, 10)
-s = Square(5)
-c = Circle(10)
+if __name__ == '__main__':
+    r = Rectangle(5, 10)
+    s = Square(5)
+    c = Circle(10)
 
-figure = [r, s, c]
+    figure = [r, s, c]
 
-for fig in figure:
-    print(f'Периметр фигуры: {fig.get_perimeter():.2f}')
+    for fig in figure:
+        print(f'Периметр фигуры: {fig.get_perimeter():.2f}')
