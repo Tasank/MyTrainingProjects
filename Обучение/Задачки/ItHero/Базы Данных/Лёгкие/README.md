@@ -1,4 +1,4 @@
-"""
+# Задание
 Вам дана таблица users с полями:
 username
 email
@@ -14,7 +14,8 @@ email
 
 Примечание: Обратите внимание, что myUSERname и myusername для почтовых сервисов — одно и
 то же, т.к. они не чувствительны к регистру.
-"""
+## Решение
+```sql
 SELECT
     username,
     email,
@@ -25,3 +26,4 @@ SELECT
     END AS isequal
 FROM
     users;
+```
