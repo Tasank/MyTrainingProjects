@@ -1,0 +1,27 @@
+"""
+Вам дана таблица users с полями:
+username
+email
+
+Вам нужно проверить гипотезу, что пользователи часто делают username на платформе таким же, как левая часть почты (до символа @).
+
+Напишите запрос, который выведет:
+
+1. username
+2. email
+3. левую часть email
+4. `isEqual` - столбец `True`/`False`, который проверяет гипотезу
+
+Примечание: Обратите внимание, что myUSERname и myusername для почтовых сервисов — одно и
+то же, т.к. они не чувствительны к регистру.
+"""
+SELECT
+    username,
+    email,
+    SUBSTRING(email, 1, POSITION('@' IN email) - 1) AS left_part,
+    CASE
+        WHEN LOWER(username) = SUBSTRING(LOWER(email), 1, POSITION('@' IN email) - 1) THEN TRUE
+        ELSE FALSE
+    END AS isequal
+FROM
+    users;
