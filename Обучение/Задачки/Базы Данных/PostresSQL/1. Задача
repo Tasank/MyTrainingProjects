@@ -1,0 +1,8 @@
+SELECT
+    customer_id,
+    order_date,
+    total,
+    CASE
+        WHEN order_date > CURRENT_DATE THEN TRUE ELSE False
+    END AS is_late
+FROM orders;

@@ -1,0 +1,10 @@
+В таблице `products` есть столбцы `product_id`, `product_name`, `price` и `category`.
+Напишите запрос, который выводит столбцы `product_name`, `price` и `category`,
+а также столбец `is_expensive`, который равен `TRUE`, если `price` больше 100, и `FALSE` в противном случае.
+
+SELECT product_name, price, category,
+CASE
+    WHEN price > 100 THEN TRUE
+    ELSE FALSE
+END AS is_expensive
+FROM `products`;
