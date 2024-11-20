@@ -4,7 +4,9 @@
 
 **Задача 2**
 
-В таблице `products` есть столбцы `product_id`, `product_name`, `price` и `category`. Напишите запрос, который выводит столбцы `product_name`, `price` и `category`, а также столбец `is_expensive`, который равен `TRUE`, если `price` больше 100, и `FALSE` в противном случае.
+В таблице `products` есть столбцы `product_id`, `product_name`, `price` и `category`. Напишите запрос, который выводит столбцы `product_name`, `price` и `category`, а также столбец `is_expensive`, который равен `TRUE`, если `price` больше 100, и `FALSE` в противном случае.SELECT 
 
-Эти задачи требуют использования функций `CASE` и `SUBSTRING`, а также работы с датами и числами.
+**Задача 3**
+ 
 
+**Задача 4**

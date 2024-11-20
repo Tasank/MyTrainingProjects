@@ -70,5 +70,27 @@ pct - процент, округленный до двух знаков посл
 
 ## Решение
 ```sql
-
+SELECT 
+    r.shop,
+    ROUND(r.all_summ_skid / r.all_summ * 100, 2) AS pct
+FROM (
+    SELECT 
+        b.shop,
+        SUM(b.summ - b.summ_with_disc) * 1.0 AS all_summ_skid,
+        SUM(b.summ) * 1.0 AS all_summ
+    FROM 
+        apteka.Bonuscheques b
+    GROUP BY 
+        b.shop
+) r
+```
+## Решение №2 
+#### *Это решение без вложенного запроса, меньше, но чуть с более сложной формулой*
+Умножение на 1.0 нужно для приведения к типу float, так как в обратом случае вычисления будут не точными и не пройдёт тесты 1 и 2
+```sql
+SELECT
+    b.shop,
+    ROUND(SUM((b.summ * 1.0) - (b.summ_with_disc * 1.0)) / SUM(b.summ) * 100, 2) AS pct
+FROM apteta.Bonuscheques b
+GROUP BY b.shop
 ```
