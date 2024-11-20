@@ -1,0 +1,5 @@
+SELECT
+    a.category,
+    ROUND(SUM((a.total_quantity * 1.0) - (a.defective_quantity * 1.0)) / SUM(a.total_quantity) * 100, 2) AS defect_pct
+FROM Products a
+GROUP BY a.category
