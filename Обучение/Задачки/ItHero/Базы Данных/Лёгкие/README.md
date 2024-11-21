@@ -94,3 +94,55 @@ SELECT
 FROM apteta.Bonuscheques b
 GROUP BY b.shop
 ```
+
+---
+
+## Задача №3
+
+Клиенты с количеством заказов выше среднего
+Вы работаете с базой данных apteka. Обязательно указывайте имя БД при указании таблиц. Apteka содержит следующие таблицы:
+
+Bonuscheques
+
+* дата и время совершения транзакции - datetime
+
+* название аптеки - shop
+
+* номер бонусной карты - card
+
+* количество начисленных бонусов - bonus_earned
+
+* количество потраченных бонусов - bonus_spent
+
+* сумма чека - summ
+
+* сумма чека с учетом скидок и списаний бонусов - summ_with_disc
+
+* номер документа - doc_id
+
+ 
+
+Задача
+
+Напишите запрос, который выводит карты клиентов, участвующих в бонусной программе и их количество заказов, при условии, что количество их заказов превышает среднее значение по всем пользователям бонусной программы.
+
+Столбцы в результате
+
+card - номер бонусной карты
+order_count - количество заказов по этой карте
+
+## Решение
+```sql
+WITH order_counts AS (
+  SELECT card, COUNT(DISTINCT doc_id) AS order_count
+  FROM apteka.Bonuscheques
+  WHERE card IS NOT NULL
+  GROUP BY card
+)
+SELECT card, order_count
+FROM order_counts
+WHERE order_count > (SELECT AVG(order_count) FROM order_counts)
+ORDER BY order_count DESC;
+```
+DESC сортирует результат по убыванию, можно его убрать (ASC), это не влияет на решение
+
