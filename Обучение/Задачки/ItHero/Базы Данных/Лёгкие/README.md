@@ -134,15 +134,158 @@ order_count - количество заказов по этой карте
 ## Решение
 ```sql
 WITH order_counts AS (
-  SELECT card, COUNT(DISTINCT doc_id) AS order_count
-  FROM apteka.Bonuscheques
-  WHERE card IS NOT NULL
-  GROUP BY card
+  SELECT 
+    card, 
+    COUNT(DISTINCT doc_id) AS order_count
+  FROM 
+    apteka.Bonuscheques
+  WHERE 
+    card IS NOT NULL
+  GROUP BY 
+    card
 )
-SELECT card, order_count
-FROM order_counts
-WHERE order_count > (SELECT AVG(order_count) FROM order_counts)
-ORDER BY order_count DESC;
+-- основной запрос
+SELECT 
+    card, order_count
+FROM 
+    order_counts
+WHERE 
+    order_count > (SELECT AVG(order_count) FROM order_counts)
+ORDER BY 
+    order_count DESC;
 ```
 DESC сортирует результат по убыванию, можно его убрать (ASC), это не влияет на решение
 
+## Задача №4
+
+Среднее количество бонусов для аптеки
+Вы работаете с базой данных apteka. Обязательно указывайте имя БД при указании таблиц. Apteka содержит следующие таблицы:
+
+Bonuscheques
+
+* дата и время совершения транзакции - datetime
+
+* название аптеки - shop
+
+* номер бонусной карты - card
+
+* количество начисленных бонусов - bonus_earned
+
+* количество потраченных бонусов - bonus_spent
+
+* сумма чека - summ
+
+* сумма чека с учетом скидок и списаний бонусов - summ_with_disc
+
+* номер документа - doc_id
+
+Shops
+
+* идентификатор аптеки - id
+
+* название аптеки - name
+
+ 
+
+Задача
+
+У вас есть таблица bonuscheques, которая содержит информацию о транзакциях по бонусной системе. Каждая запись в таблице представляет собой одну транзакцию, содержащую информацию о магазине, количестве начисленных бонусов и других данных.
+
+Напишите запрос, который вычислит среднее количество начисленных бонусов для каждой аптеки. Результат округлите до двух знаков после запятой.
+
+Столбцы в результате
+
+shop - Аптека в формате "Аптека 7"
+avg_bonus - среднее количество начисленных бонусов, округленное до двух знаков после запятой
+
+## Решение
+```sql
+SELECT 
+    a.shop,
+    ROUND(AVG(a.bonus_earned), 2) AS bonus_avg
+FROM 
+    apteka.Bonuscheques a
+GROUP BY 
+    a.shop;
+```
+
+## Задача №5
+### Та же БД, Суммарная стоимость заказов для каждой аптеки
+
+
+Необходимо определить суммарную стоимость заказов для каждой аптеки, исключая заказы, у которых сумма чека со скидками и списаниями бонусов составляет менее 100.
+
+Важно: рассматриваем только покупки клиентов, участвующих в бонусной системе, то есть заказы, хранящиеся в bonuscheques.
+
+Примечание: В бонусной системе предполагаются скидки на покупку. В данном случае, стоимость заказа до применения скидки нас не интересует - это не полученная прибыль. Оперируйте суммой заказа после применения скидки.
+
+Столбцы в результате
+
+shop - Аптека в формате "Аптека 7"
+total_sum - общая стоимость заказов по данной аптеке
+
+## Решение
+```sql
+SELECT
+  a.shop,
+  SUM(summ_with_disc) AS total_sum
+FROM 
+    apteka.Bonuscheques a
+WHERE 
+    a.summ_with_disc >= 100 AND card IS NOT NULL 
+GROUP BY 
+    a.shop;
+```
+
+## Задача №6
+Топ 3 сотрудника по количеству выполненных продаж
+Вы работаете с базой данных apteka. Обязательно указывайте имя БД при указании таблиц. Apteka содержит следующие таблицы:
+
+Sales
+
+* дата покупки - dr_dat 
+
+* время покупки - dr_tim
+
+* номер чека - dr_nchk 
+
+* номер магазина (FK - shops) - dr_apt 
+
+* кол-во проданного товара - dr_kol
+
+* закупочная цена - dr_czak
+
+* розничная цена - dr_croz
+
+* сумма скидки - dr_sdisc
+
+* табельный номер сотрудника (FK - employee) - dr_tabempl
+
+Employee
+
+* табельный номер сотрудника - emp_tabn
+
+* ФИО сотрудника - emp_fio
+
+
+
+Задача
+
+Необходимо определить топ 3 сотрудников, которые совершили наибольшее количество продаж.
+
+Примечание: поскольку в таблице продаж по бонусной системе не фиксируется сотрудник, определять наибольшее количество продаж следует по таблице sales.
+
+Столбцы в результате
+
+emp_tabn - ID сотрудника
+employee_name - ФИО сотрудника
+sales_count - количество продаж
+
+```sql
+SELECT e.emp_tabn AS emp_tabn, e.emp_fio AS employee_name, COUNT(s.dr_nchk) AS sales_count
+FROM Employee e
+JOIN Sales s ON e.emp_tabn = s.dr_tabempl
+GROUP BY e.emp_tabn, e.emp_fio
+ORDER BY sales_count DESC
+LIMIT 3;
+```
