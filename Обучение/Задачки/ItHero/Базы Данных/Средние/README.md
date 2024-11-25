@@ -70,3 +70,24 @@ language_id - какой язык использовали
 `assert eval("os.system('rm -rf /')")`
 Дополнительно тему поиска по шаблону можно изучить здесь: https://postgrespro.ru/docs/postgresql/9.6/functions-matching.
 
+```sql
+SELECT code, 
+       CASE 
+           WHEN language_id = 1 THEN 'SQL'
+           WHEN language_id = 2 THEN 'Python'
+       END as language_id
+FROM CodeSubmit
+WHERE 
+    (language_id = 1 AND 
+     UPPER(code) LIKE '%DROP %' OR 
+     UPPER(code) LIKE '%DELETE %' OR 
+     UPPER(code) LIKE '%TRUNCATE %' OR 
+     UPPER(code) LIKE '%INSERT %' OR 
+     UPPER(code) LIKE '%CREATE %'
+    )
+    OR 
+    (language_id = 2 AND 
+     UPPER(code) LIKE '%EXEC(%' OR 
+     UPPER(code) LIKE '%EVAL(%'
+    );
+```
