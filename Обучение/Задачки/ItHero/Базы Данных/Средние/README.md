@@ -70,6 +70,7 @@ language_id - какой язык использовали
 `assert eval("os.system('rm -rf /')")`
 Дополнительно тему поиска по шаблону можно изучить здесь: https://postgrespro.ru/docs/postgresql/9.6/functions-matching.
 
+### Решение
 ```sql
 SELECT code, 
        CASE 
@@ -91,3 +92,4 @@ WHERE
      UPPER(code) LIKE '%EVAL(%'
     );
 ```
+
