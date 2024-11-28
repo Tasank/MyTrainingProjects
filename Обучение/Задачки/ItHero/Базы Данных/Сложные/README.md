@@ -67,3 +67,54 @@ ORDER BY
     ymd;
 ```
 
+## Изменение пикового значения
+На основании таблицы users, давайте посмотрим - как с каждым днем менялось пиковое значение количества регистраций за один день.
+
+Давайте возьмем период с 01.01.2022 и последующие 110 дней. А потом найдем:
+
+dt - какая дата
+cnt - сколько людей зарегистрировалось в этот день
+max_cnt - нарастающее значение максимума регистраций
+diff - разница между текущим значением и актуальным максимумом
+Примечание: Естественно, дни без регистраций мы тоже учитываем.
+
+```sql
+WITH daily_registrations AS (
+    SELECT 
+        generated_dates.date_time AS dt,
+        COUNT(users.username) AS cnt
+    FROM generate_series(
+        '2022-01-01'::timestamp,
+        '2022-01-01'::timestamp + interval '110 days',
+        interval '1 day'
+    ) AS generated_dates(date_time)
+    LEFT JOIN users 
+        ON generated_dates.date_time = users.date_joined::date::timestamp
+    GROUP BY generated_dates.date_time
+),
+running_maximum AS (
+    SELECT 
+        dt,
+        cnt,
+        MAX(cnt) OVER (ORDER BY dt) AS max_cnt
+    FROM daily_registrations
+)
+SELECT 
+    dt,
+    cnt,
+    max_cnt,
+    cnt - max_cnt AS diff
+FROM running_maximum;
+```
+### Уменьшенный запрос (Кому удобнее)
+```
+WITH data AS (select g.dt, count(u.username) AS cnt
+FROM generate_series('2022-01-01'::timestamp , '2022-01-01'::timestamp + interval '110 days', interval '1 day') g(dt)
+LEFT JOIN users u
+ON g.dt = u.date_joined::date::timestamp
+GROUP BY g.dt),
+max_cnt AS (select dt, cnt, max(cnt) OVER (order by dt) AS max_cnt
+FROM data)
+SELECT dt, cnt, max_cnt, cnt-max_cnt AS diff
+FROM max_cnt
+```
