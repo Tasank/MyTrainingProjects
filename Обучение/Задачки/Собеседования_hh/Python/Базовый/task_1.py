@@ -14,7 +14,5 @@ def age_check():
             print('Вы не прошли проверку возраста')
     except ValueError:
         print('Некорректное значение возраста')
-        print('Повторите снова.')
-        age_check()
 
 age_check()
