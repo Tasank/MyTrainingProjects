@@ -21,4 +21,4 @@ def arbuz():
     result = dry / new_humidity
     return round(result, 2)
 
-print(arbuz())
+print(f'Новая масса арбуза: {arbuz()} кг')
