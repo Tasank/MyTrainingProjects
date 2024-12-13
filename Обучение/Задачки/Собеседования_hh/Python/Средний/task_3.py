@@ -31,9 +31,23 @@
 """
 
 def solve(input_str: str) -> list:
+    numbers = list(map(int, input_str.split()))
+    result = []
+    current_sequence = []
 
+    for i in range(len(numbers)):
+        if i == 0 or numbers[i] > numbers[i - 1]:
+            current_sequence.append(numbers[i])
+        else:
+            if len(current_sequence) > 1:
+                results.append(''. join(map(str, current_sequence)))
+            current_sequence = [numbers[i]]
 
+    # Проверка последней последовательности
+    if len(current_sequence) > 1:
+        results.append(''. join(map(str, current_sequence)))
 
+    return results
 
 # Пример использования
 input_string = input()
