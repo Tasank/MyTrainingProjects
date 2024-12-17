@@ -26,11 +26,11 @@ def get_weather(api_key, city):
     }
 
     try:
-        # Отправляем GET запрос
+        # GET запрос
         response = requests.get(base_url, params=params)
         response.raise_for_status()  # Проверка на ошибки
 
-        # Получаем данные в формате JSON
+        # Получить данные в формате JSON
         data = response.json()
 
         # Извлекаем нужные данные
@@ -45,7 +45,7 @@ def get_weather(api_key, city):
             'Скорость ветра км/ч': data['current']['wind_kph']
         }
 
-        # Создаем DataFrame
+        # Создать DataFrame
         df = pd.DataFrame([weather_data])
 
         return df
@@ -73,7 +73,7 @@ print("\nТекущая погода в разных городах:")
 print("=" * 100)
 print(all_weather_data.to_string(index=False))
 
-# Сохраняем результаты в Excel файл
+# Сохранить результаты в Excel файл
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 filename = f"weather_data_{timestamp}.xlsx"
 all_weather_data.to_excel(filename, index=False)
