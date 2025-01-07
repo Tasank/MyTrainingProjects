@@ -15,6 +15,36 @@ class Book:
             return tup_material[0]
 
 
+    def read(self):
+        try:
+            print(f'Всего страниц: {len(self.pages.keys())}')
+            n = int(input('Введите номер страницы чтобы начать чтение: \n'))
+
+            if n >= len(self.pages.keys()) or n < 0:
+                print('Такого номера страницы нет.\n')
+                return self.read()
+        except ValueError:
+            print('Введи номер (число) страницы.\n')
+            return self.read()
+
+        def rec_read(n=0):
+            if n == len(self.pages.keys()):
+                print('Книга прочитана!')
+                return
+            else:
+                n += 1
+                print(f'{n} из {len(self.pages.keys())} страниц.')
+                print(f'{self.pages[n]}\n')
+                next_r = input('Для продолжения чтения нажмите Enter.\nЧтобы завершить чтение напишите "закрыть": ')
+                if next_r.lower() == 'закрыть':
+                    return
+                return rec_read(n)
+        rec_read(n)
+
+
+
+
+
     def info(self):
         print(self)  # Придумать вывод названия объекта
         print(f'Название: {self.title}\n'
@@ -33,3 +63,4 @@ book_1 = Book('Советские сказки', "Александр Остап�
             {1: 'Содержание первой страницы', 2: "Содержание второй страницы"})
 book.info()
 book_1.info()
+book.read()
