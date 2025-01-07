@@ -18,13 +18,13 @@ class Book:
     def read(self):
         try:
             print(f'Всего страниц: {len(self.pages.keys())}')
-            n = int(input('Введите номер страницы чтобы начать чтение: \n'))
+            n = int(input('Введите номер страницы чтобы начать чтение: '))
 
-            if n >= len(self.pages.keys()) or n < 0:
-                print('Такого номера страницы нет.\n')
+            if n not in self.pages.keys():
+                print('[ПРЕДУПРЕЖДЕНИЕ] Такого номера страницы нет.\n')
                 return self.read()
         except ValueError:
-            print('Введи номер (число) страницы.\n')
+            print('[ПРЕДУПРЕЖДЕНИЕ] Введите номер (число) страницы.\n')
             return self.read()
 
         def rec_read(n=0):
@@ -32,12 +32,14 @@ class Book:
                 print('Книга прочитана!')
                 return
             else:
-                n += 1
-                print(f'{n} из {len(self.pages.keys())} страниц.')
-                print(f'{self.pages[n]}\n')
+                print('-' * 50)
+                print(f'\n\n{n} из {len(self.pages.keys())} страниц.')
+                print(f'{self.pages[n]}\n\n')  # Доделать вывод в кол-во символов в строке
+                print('-' * 50)
                 next_r = input('Для продолжения чтения нажмите Enter.\nЧтобы завершить чтение напишите "закрыть": ')
                 if next_r.lower() == 'закрыть':
                     return
+                n += 1
                 return rec_read(n)
         rec_read(n)
 
