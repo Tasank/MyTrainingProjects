@@ -13,7 +13,26 @@ class Human:
         print(f'Я - {self.gender}')
         print(f'Мой рост - {self.height} см')
         print(f'Мой вес - {self.weight} кг')
-        print(f'Моя здоровье - [{self.health}]')
+        print(f'Моя здоровье - [{self.health}]', end='\n\n')
+
+    def birthday(self):
+        self.age += 1
+
+    def do_it(self, func):
+        print('Выполняю поставленную задачу')
+        try:
+            func()
+            print('Задачу выполнил.')
+        except Exception as e:
+            print('Задача не выполнена.', e)
+
 
 Alya = Human('Алия', 20, 'девушка', 170, 60, 'здорова')
 Alya.hello_me()
+
+
+def play():
+    print('Пнуть мячик')
+
+
+Alya.do_it(play)
