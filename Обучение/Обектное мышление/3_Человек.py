@@ -5,6 +5,7 @@ class Human:
         self.height = height
         self.weight = weight
         self.health = health
+        self.status = 'Гражданский'
 
         gender_list = ['мужской', 'женский']
         if gender.lower() in gender_list:
@@ -23,8 +24,13 @@ class Human:
         print(f'Моя здоровье - [{self.health}]', end='\n\n')
 
     def povestka(self):
-        if self.gender == 'мужской' and self.age >= 18:
-            print('Пришла повестка')
+        if self.gender == 'мужской' and self.age >= 18 and self.status == 'Гражданский':
+            print('|---------------|')
+            print('|Пришла повестка|')
+            print('|_______________|')
+            self.birthday()
+            self.status = 'Военнообязанный'
+
 
     def birthday(self):
         self.age += 1
