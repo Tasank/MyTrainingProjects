@@ -39,7 +39,7 @@ class Human:
         print('Выполняю поставленную задачу')
         try:
             func()
-            print('Задачу выполнил.')
+            print('Задачу выполнена.')
         except Exception as e:
             print('Задача не выполнена.', e)
 
