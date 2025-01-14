@@ -24,9 +24,13 @@ class Energy:
         except Exception as e:
             return f'Произошла ошибка: {e}'
 
+    def __str__(self):
+        return f'Энергия: {self.value} {self.unit}'
+
 
 N1 = Energy(10, 'Ньютонов')
 N1.add_energy(19)
 print(N1.add_energy('d'))
 
 print(N1.consume_energy(220))
+print(N1)
