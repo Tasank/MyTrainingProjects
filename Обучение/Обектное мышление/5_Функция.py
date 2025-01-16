@@ -23,6 +23,7 @@ class Function:
 
 
 
+
 f = Function('вывод')
 f('Вывод сообщения.')
 
