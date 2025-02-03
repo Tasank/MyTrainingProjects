@@ -1,4 +1,21 @@
-text = 'Машина'
-# list_num = [1, 2, 3, 4, 5]
+# %s - строка
+# %d - целое число
+# %f - дробное число
 
-print(text[::-1])
+
+
+
+
+
+text = 'World'
+print("Hello, %s!" % text)
+
+
+age = 15
+print("Мне %d лет" % age)
+
+pi = 3.1415926213123123123136346
+print("Pi = %.2f" % pi)
+
+name = 'Паша'
+print('|%20s|' % name)
