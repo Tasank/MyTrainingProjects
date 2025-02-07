@@ -7,6 +7,10 @@ product_5 = "001202309"
 
 # Извлечение месяца и года
 print(int(product_1[3:7]))
+
+# month_1 = int(product_1[1:3])
+# year_1 = int(product_1[3:7])
+
 month_1, year_1 = int(product_1[1:3]), int(product_1[3:7])
 month_2, year_2 = int(product_2[1:3]), int(product_2[3:7])
 month_3, year_3 = int(product_3[1:3]), int(product_3[3:7])
