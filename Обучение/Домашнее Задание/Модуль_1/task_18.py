@@ -9,7 +9,7 @@ class Hero:
         print('ТЫ ПОПЛАТИШСЯ ЗА СОВЕРШЁННЫЕ ЗЛОДЕЯНИЯ!')
 
 
-Gideon = Hero('Гидион', 100, 10, 5)
+Gideon = Hero('Гидеон', 100, 10, 5)
 
 print(f'Имя: {Gideon.name} \n'
       f'Здоровье: {Gideon.health} \n'
