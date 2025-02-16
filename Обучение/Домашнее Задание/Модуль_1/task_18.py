@@ -1,3 +1,32 @@
+# Практика урока
+
+trip = {
+    13: ("Гостиный двор", "ГДК", "Магазин Гипер", "Галерея"),
+    25: ("Парк Победы", "Улица Ленина", "Главная площадь", "Речное депо")
+}
+
+
+class Bus:
+    def __init__(self, trip):
+        self.trip = trip
+
+    def navigator(self, stop):
+        line = trip[self.trip]
+        print(f"Автобус {self.trip} прибыл на остановку {line[stop]}")
+
+
+go = Bus(13)
+for num in range(4):
+   go.navigator(num)
+
+print('\n\n----------------------------------------------\n\n')
+
+
+
+
+
+
+# Домашнее задание
 class Hero:
     def __init__(self,name, health, damage, armor):
         self.name = name
