@@ -44,9 +44,6 @@ class Book:
         rec_read(n)
 
 
-
-
-
     def info(self):
         print(self)  # Придумать вывод названия объекта
         print(f'Название: {self.title}\n'
