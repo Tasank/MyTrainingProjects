@@ -1,4 +1,9 @@
-enumerate = 5
+age = int(input('Введите ваш возраст: '))
 
-print(enumerate + 5)
-print(enumerate)
+if age > 14:
+    print('Вы прошли проверку возраста')
+else:
+    print('Проверка возраста не пройдена.')
+
+if age >= 18:
+    print('Вам доступен платный контент.')
