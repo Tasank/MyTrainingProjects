@@ -1,8 +1,5 @@
 import turtle
 
-# Создаем экран
-screen = turtle.Screen()
-screen.bgcolor("white")
 
 # Создаем черепашек
 red = turtle.Turtle()
@@ -75,4 +72,4 @@ for _ in range(36):
 
 
 
-screen.mainloop()
+turtle.mainloop()
