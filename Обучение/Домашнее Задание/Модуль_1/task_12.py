@@ -19,7 +19,7 @@ blue.speed(0)
 yellow.speed(0)
 green.speed(0)
 
-# Синяя черепашка рисует
+# Синяя черепашка рисует спираль
 blue.penup()
 blue.goto(-200, -150)
 blue.pendown()
