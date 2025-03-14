@@ -29,7 +29,7 @@ for i in range(60):
     blue.forward(i * 2)
     blue.right(59)
     for _ in range(2):
-        blue.forward(i* 2)
+        blue.forward(i * 2)
         blue.right(59)
 
 # зелёная черепашка рисует квадрат
