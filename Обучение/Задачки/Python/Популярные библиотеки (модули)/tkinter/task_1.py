@@ -22,7 +22,7 @@ def delete_text():
 
 # Создание кнопки
 button = Button(root, text='Узнать тайну', font='Arial 16', bg='black', fg='white',
-    activebackground='white', activeforeground='black', command=delete_text)
+    command=delete_text)
 button.pack()
 
 root.mainloop()
