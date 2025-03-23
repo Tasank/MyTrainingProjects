@@ -1,9 +1,5 @@
-age = int(input('Введите ваш возраст: '))
+num_list = [10, 20, 30, 45]
 
-if age >= 14:
-    print('Рады приветствовать!')
-else:
-    print('Доступ запрещен!')
+del num_list[3]
 
-if age >= 18:
-    print('Доступен платный контент!')
+print(num_list)
