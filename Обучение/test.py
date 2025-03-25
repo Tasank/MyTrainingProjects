@@ -1,5 +1,6 @@
-num_list = [10, 20, 30, 45]
 
-del num_list[3]
+def my_func(a=10, b=10):
+    print('Вызов функции')
+    print(a + b)
 
-print(num_list)
+my_func(51, 1)
