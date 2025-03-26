@@ -38,3 +38,4 @@ if (year_5, month_5) > freshest_date:
     freshest_date = (year_5, month_5)
 
 print(f"Самый свежий товар: {freshest_code}")
+print(f'Свежая дата: {freshest_date}')
