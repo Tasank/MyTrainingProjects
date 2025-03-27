@@ -17,7 +17,7 @@ def check_button(selected_button):
     else:
         for btn in buttons:
             if btn != correct_button:
-                btn.place_forget() # метод place_forget() удаляет виджет из интерфейса
+                btn.destroy()
         label.config(text="Ты не угадал >:(")
 
 # Создаем метку для отображения результата
