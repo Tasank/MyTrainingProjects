@@ -1,4 +1,5 @@
 import random
+import time
 
 # Ввод имени игрока
 name = input("Введи своё имя: ")
@@ -10,12 +11,40 @@ class Player:
         self.hp = hp
         self.damage = damage
 
+    def attack(self, victim):
+        victim.hp -= self.damage
+        print(f"Ты нанёс врагу {self.damage} урона. Теперь у него {victim.hp} здоровья.")
+        # возврат состояния, чтобы игра понимала, когда и кто выигрывает\проигрывает
+        if victim.hp <= 0:
+            print(f"{victim.name} повержен!")
+            return False
+        else:
+            return True
+
+
+
+
 # Класс врага
 class Enemy:
-    def __init__(self, name, hp, damage):
-        self.name = name
-        self.hp = hp
-        self.damage = damage
+    races = {
+        "Слизняк": (10, 10),
+        "Волк": (25, 20),
+        "Орк": (50, 45),
+        "Группа гоблинов": (120, 25),
+        "Оборотень": (150, 50)
+    }
+
+    def __init__(self):
+        self.name = random.choice(list(self.races.keys()))
+        self.hp = self.races[self.name][0]
+        self.damage = self.races[self.name][1]
+
+    def attack(self, victim):
+        victim.hp -= self.damage
+        print(f"{self.name} нанёс тебе {self.damage} урона. Теперь у тебя {victim.hp} здоровья.")
+        if victim.hp <= 0:
+            exit(print("ПОТРАЧЕНО!"))
+
 
 # Функция для создания героя
 def create_hero(name, race, prof):
@@ -52,23 +81,48 @@ while prof not in profs:
 
 # Создание героя
 hero = create_hero(name, race, prof)
-print(f"Здравствуй, герой с именем {hero.name}!\n" 
+print(f"\n\nЗдравствуй, герой с именем {hero.name}!\n" 
       f"Твоё здоровье равно {hero.hp} HP.\n"
       f"Твой урон равен {hero.damage} единицам.\n" 
-      f"Желаю удачи в приключениях, странник! 🏹🔪")
+      f"Желаю удачи в приключениях, странник! 🏹🔪\n")
 
-# Параметры врага
-enemy_names = ["Орк", "Тролль", "Гоблин", "Дракон", "Скелет"]
-enemy_hp_values = [100, 150, 200, 250, 300]
-enemy_damage_values = [15, 20, 25, 30, 35]
+time.sleep(5)
 
-# Функция для создания врага
-def create_enemy():
-    name = random.choice(enemy_names)
-    hp = random.choice(enemy_hp_values)
-    damage = random.choice(enemy_damage_values)
-    return Enemy(name, hp, damage)
 
-# Создание врага
-enemy = create_enemy()
-print(f"Враг появился! Это {enemy.name} с {enemy.hp} HP и {enemy.damage} урона!")
+def fight(victim):
+    result = hero.attack(victim)
+    time.sleep(2)
+    if result:
+        victim.attack(hero)
+        time.sleep(3)
+        fight(victim)
+    else:
+        print("Ты победил!\n")
+        time.sleep(2)
+        start()
+
+
+
+def start():
+    enemy = Enemy()
+    print(f"Тебе встретился {enemy.name}. ❤️: {enemy.hp}, ⚔️: {enemy.damage}")
+    print("Нападать?")
+    answer = input("Да/Нет: ").lower()
+
+    if answer == "да":
+        fight(enemy)
+    else:
+        luck = random.randint(0, 100)
+
+        if luck in range(40):
+            print("Ты смог незаметно ускользнуть и пойти дальше!\n")
+            time.sleep(2)
+            start()
+        else:
+            print("Проверка удачи провалена! Тебя заметили.\n")
+            time.sleep(2)
+            enemy.attack(hero)
+            fight(enemy)
+
+
+start()
