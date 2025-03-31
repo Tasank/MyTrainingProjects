@@ -103,4 +103,18 @@ def erase(event):
 root.bind_all("<3>", erase)
 root.bind_all("<B3-Motion>", erase)
 
+def ask_color(event):
+   global color
+   color_code = askcolor(title="Выбери цвет")
+   color = color_code[1]
+   size_pen.configure(fg=color)
+
+canvas.bind_all("<2>", ask_color)
+
+def clear_canvas(event):
+    canvas.delete("all")
+
+root.bind_all("<c>", ask_color)
+root.bind_all("<BackSpace>", clear_canvas)
+
 root.mainloop()
