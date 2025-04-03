@@ -49,7 +49,6 @@ line2_btn.grid(row=3, column=1)
 plus_btn.grid(row=4, column=1)
 minus_btn.grid(row=5, column=1)
 
-
 # Функция, которая будет отвечать за рисование
 def paint(event):
     # Если нажатие произошло не на холсте, то рисование не начинается.
@@ -85,11 +84,6 @@ def paint(event):
     print(event.__dict__)
 
 
-# Бинд рисование на клик
-root.bind_all('<1>', paint)
-root.bind_all("<B1-Motion>", paint)
-
-
 # Функция ластика
 def erase(event):
     canvas.create_oval(event.x - brush * 2,
@@ -100,20 +94,23 @@ def erase(event):
                        outline="white")
 
 
-root.bind_all("<3>", erase)
-root.bind_all("<B3-Motion>", erase)
-
 def ask_color(event):
    global color
    color_code = askcolor(title="Выбери цвет")
    color = color_code[1]
    size_pen.configure(fg=color)
 
-canvas.bind_all("<2>", ask_color)
+
 
 def clear_canvas(event):
     canvas.delete("all")
 
+# Бинд рисование на клик
+root.bind_all('<1>', paint)
+root.bind_all("<B1-Motion>", paint)
+canvas.bind_all("<2>", ask_color)
+root.bind_all("<3>", erase)
+root.bind_all("<B3-Motion>", erase)
 root.bind_all("<c>", ask_color)
 root.bind_all("<BackSpace>", clear_canvas)
 
