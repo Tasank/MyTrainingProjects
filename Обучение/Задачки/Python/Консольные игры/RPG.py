@@ -6,10 +6,12 @@ name = input("Введи своё имя: ")
 
 # Класс игрока
 class Player:
-    def __init__(self, name, hp, damage):
+    def __init__(self, name, hp, damage, xp=0, lvl=0):
         self.name = name
         self.hp = hp
         self.damage = damage
+        self.xp = xp
+        self.lvl = lvl
 
     def attack(self, victim):
         victim.hp -= self.damage
@@ -31,13 +33,18 @@ class Enemy:
         "Волк": (25, 20),
         "Орк": (50, 45),
         "Группа гоблинов": (120, 25),
-        "Оборотень": (150, 50)
+        "Оборотень": (150, 50),
+        "Великан": (200, 100),
+        "Дракон": (300, 200),
+        "Скелет": (50, 10),
+
     }
 
     def __init__(self):
         self.name = random.choice(list(self.races.keys()))
         self.hp = self.races[self.name][0]
         self.damage = self.races[self.name][1]
+        self.xp = self.hp * 1.5
 
     def attack(self, victim):
         victim.hp -= self.damage
@@ -58,13 +65,17 @@ def create_hero(name, race, prof):
 races = {
     "эльф": (1.5, 1),
     "гном": (0.8, 1.2),
-    "человек": (1, 1)
+    "человек": (1, 1),
+    "дампир": (1.5, 1.5),
+    "зверолюди": (2, 0.8)
 }
 
 profs = {
     "лучник": (0.9, 2),
     "щитоносец": (2, 0.6),
-    "рыцарь": (1.2, 1.2)
+    "рыцарь": (1.2, 1.2),
+    "колдун": (1.5, 1.5),
+    "искатель": (1, 1)
 }
 
 # Выбор расы
