@@ -6,19 +6,39 @@ name = input("Введи своё имя: ")
 
 # Класс игрока
 class Player:
-    def __init__(self, name, hp, damage, xp=0, lvl=0):
+    def __init__(self, name, hp, damage):
         self.name = name
         self.hp = hp
         self.damage = damage
-        self.xp = xp
-        self.lvl = lvl
+        self.xp = 0
+        self.lvl = 1
+        self.heals = 0
 
     def attack(self, victim):
         victim.hp -= self.damage
         print(f"Ты нанёс врагу {self.damage} урона. Теперь у него {victim.hp} здоровья.")
         # возврат состояния, чтобы игра понимала, когда и кто выигрывает\проигрывает
         if victim.hp <= 0:
-            print(f"{victim.name} повержен!")
+            self.xp += victim.xp
+            print('|----------------------------')
+            print(f"| 🎉 {victim.name} повержен 🎉   ")
+            print(f'| Ты получил {victim.xp} опыта.')
+            print(f'| Твой уровень -> {self.lvl}')
+            print(f'| Твой опыт -> {self.xp}   ')
+            print('|----------------------------')
+            # повышение уровня, если опыт стал равен 100
+            if self.xp >= 100:
+                self.lvl += 1
+                print(f"Уровень повышен: {self.lvl}\n")
+                self.xp = 0
+                self.damage *= 1.5
+            luck = random.randint(0, 1)
+            if luck == 1:
+                self.heals += 1
+                print(f'Ты получил лечебный отвар🎁. Теперь у тебя {self.heals} отвара.')
+
+
+
             return False
         else:
             return True
@@ -113,15 +133,28 @@ def fight(victim):
         start()
 
 
+def start(heal=None):
+    if heal is None:
+        enemy = Enemy()
+    else:
+        enemy = heal
 
-def start():
-    enemy = Enemy()
     print(f"Тебе встретился {enemy.name}. ❤️: {enemy.hp}, ⚔️: {enemy.damage}")
     print("Нападать?")
-    answer = input("Да/Нет: ").lower()
+
+    answer = input("Да/Нет/Лечиться: ").lower()
 
     if answer == "да":
         fight(enemy)
+    elif answer == "лечиться":
+        if hero.heals > 0:
+            hero.hp += 50
+            hero.heals -= 1
+            print(f"Ты выпил Лечебный отвар🍷. ❤️: {hero.hp}")
+        else:
+            print("У тебя нет больше отвара.")
+        start(enemy)
+    # Проверка удачи, на побег героя
     else:
         luck = random.randint(0, 100)
 
