@@ -24,4 +24,3 @@ while True:
     root.update_idletasks()
     draw()
     time.sleep(0.01)
-
