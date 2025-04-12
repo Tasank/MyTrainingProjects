@@ -60,11 +60,18 @@ class Enemy:
 
     }
 
-    def __init__(self):
-        self.name = random.choice(list(self.races.keys()))
-        self.hp = self.races[self.name][0]
-        self.damage = self.races[self.name][1]
-        self.xp = self.hp * 1.5
+
+    def __init__(self, is_boss=False):
+        if is_boss:
+            self.name = "👤-> Грех"
+            self.hp = 500
+            self.damage = 250
+            self.xp = 0
+        else:
+            self.name = random.choice(list(self.races.keys()))
+            self.hp = self.races[self.name][0]
+            self.damage = self.races[self.name][1]
+            self.xp = self.hp * 1.5
 
     def attack(self, victim):
         victim.hp -= self.damage
@@ -134,7 +141,10 @@ def fight(victim):
 
 
 def start(heal=None):
-    if heal is None:
+    if hero.lvl >= 20:
+        enemy = Enemy(is_boss=True)
+        print("Ты достиг 20-го уровня и встретил Финального Босса!")
+    elif heal is None:
         enemy = Enemy()
     else:
         enemy = heal
@@ -154,19 +164,23 @@ def start(heal=None):
         else:
             print("У тебя нет больше отвара.")
         start(enemy)
+
     # Проверка удачи, на побег героя
     else:
-        luck = random.randint(0, 100)
-
-        if luck in range(40):
-            print("Ты смог незаметно ускользнуть и пойти дальше!\n")
-            time.sleep(2)
-            start()
-        else:
-            print("Проверка удачи провалена! Тебя заметили.\n")
-            time.sleep(2)
-            enemy.attack(hero)
+        if hero.lvl >= 20:
+            print("От босса сбежать невозможно!")
             fight(enemy)
+        else:
+            luck = random.randint(0, 100)
+            if luck in range(40):
+                print("Ты смог незаметно ускользнуть и пойти дальше!\n")
+                time.sleep(2)
+                start()
+            else:
+                print("Проверка удачи провалена! Тебя заметили.\n")
+                time.sleep(2)
+                enemy.attack(hero)
+                fight(enemy)
 
 
 start()
