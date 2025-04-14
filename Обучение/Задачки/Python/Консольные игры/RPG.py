@@ -16,7 +16,7 @@ class Player:
 
     def attack(self, victim):
         victim.hp -= self.damage
-        print(f"Ты нанёс врагу {self.damage} урона. Теперь у него {victim.hp} здоровья.")
+        print(f"Ты нанёс врагу {self.damage} урона. Теперь у него {victim.hp} здоровья.\n")
         # возврат состояния, чтобы игра понимала, когда и кто выигрывает\проигрывает
         if victim.hp <= 0:
             self.xp += victim.xp
@@ -25,7 +25,7 @@ class Player:
             print(f'| Ты получил {victim.xp} опыта.')
             print(f'| Твой уровень -> {self.lvl}')
             print(f'| Твой опыт -> {self.xp}   ')
-            print('|----------------------------')
+            print('|----------------------------\n')
             # повышение уровня, если опыт стал равен 100
             if self.xp >= 100:
                 self.lvl += 1
