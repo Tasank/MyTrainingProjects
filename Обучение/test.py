@@ -1,9 +1,3 @@
-animal = {'пантера': 'хищник',
-          'белка': 'травоядная',
-          'окунь': 'рыба',
-          'атмосфера': 'планета'}
+import time
 
-animal_keys = list(animal.keys())
-
-print(animal_keys)
-print(type(animal_keys))
+time.time_ns() # возвращает количество наносекунд, прошедших с начала эпохи Unix
