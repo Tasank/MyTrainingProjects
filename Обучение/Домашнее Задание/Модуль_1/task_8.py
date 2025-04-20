@@ -16,7 +16,7 @@ count = 0
 
 
 while count < len(questions):
-    answer = input(questions[count] + " ") # Простая подсказка, 1) обращение к списку 2) Обращение к индексу
+    answer = input(questions[count] + " ") # 1) обращение к списку 2) Обращение к индексу элемента списка
     answers_list.append(answer)
     count += 1
 
