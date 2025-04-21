@@ -36,9 +36,6 @@ class Player:
             if luck == 1:
                 self.heals += 1
                 print(f'Ты получил лечебный отвар🎁. Теперь у тебя {self.heals} отвара.')
-
-
-
             return False
         else:
             return True
