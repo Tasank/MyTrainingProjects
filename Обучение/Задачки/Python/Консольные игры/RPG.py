@@ -32,6 +32,7 @@ class Player:
                 print(f"Уровень повышен: {self.lvl}\n")
                 self.xp = 0
                 self.damage *= 1.5
+            # Проверка удачи, на руну здоровья
             luck = random.randint(0, 1)
             if luck == 1:
                 self.heals += 1
@@ -138,7 +139,7 @@ def fight(victim):
 
 
 def start(heal=None):
-    if hero.lvl >= 20:
+    if hero.lvl == 20:
         enemy = Enemy(is_boss=True)
         print("Ты достиг 20-го уровня и встретил Финального Босса!")
     elif heal is None:
