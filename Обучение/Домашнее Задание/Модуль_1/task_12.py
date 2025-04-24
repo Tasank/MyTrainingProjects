@@ -70,6 +70,4 @@ for _ in range(36):
     red.right(10)
 
 
-
-
 turtle.mainloop()
