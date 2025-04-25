@@ -56,8 +56,6 @@ for _ in range(22):
 yellow.end_fill()
 
 
-
-
 # Красная черепашка рисует круговую спираль
 red.penup()
 red.goto(200, -150)
