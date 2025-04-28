@@ -11,6 +11,7 @@ print(int(product_1[3:7]))
 # month_1 = int(product_1[1:3])
 # year_1 = int(product_1[3:7])
 
+# Множественное присваивание
 month_1, year_1 = int(product_1[1:3]), int(product_1[3:7])
 month_2, year_2 = int(product_2[1:3]), int(product_2[3:7])
 month_3, year_3 = int(product_3[1:3]), int(product_3[3:7])
@@ -21,6 +22,7 @@ month_5, year_5 = int(product_5[1:3]), int(product_5[3:7])
 freshest_code = product_1
 freshest_date = (year_1, month_1)
 
+# Если первая дата больше чем остальные, то она самая свежая
 if (year_2, month_2) > freshest_date:
     freshest_code = product_2
     freshest_date = (year_2, month_2)
