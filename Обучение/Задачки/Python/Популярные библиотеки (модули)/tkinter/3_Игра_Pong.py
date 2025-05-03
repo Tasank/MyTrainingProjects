@@ -1,52 +1,75 @@
 from tkinter import *
+from playsound3 import playsound
 
 root = Tk()
-root.geometry('800x600')
-root.title('Ping-Pong')
+root.geometry("800x600")
+root.title("Pong")
 
-canvas = Canvas(root, width=800, height=600, bg='black')
+canvas = Canvas(root, width=800, height=600, bg="black")
 canvas.pack()
 
+# Инициализация счета и рекорда
+try:
+    record_file = open("score.ini", "r+")
+    data = record_file.readline()
+    if data == "":
+        record = 0
+        record_file.write(f"{record}")
+        record_file.close()
+    else:
+        record = int(data)
+except:
+    record = 0
 
+score = 0
+
+# Создание отображения счета на экране
+score_gui = canvas.create_text(390, 20, text=f"Счет: {score}", fill="white", font=("Consolas", 20))
+canvas.create_text(390, 40, text=f"Рекорд: {record}", fill="white", font=("Consolas", 20))
+
+# Родительский класс игроков (ракеток)
 class Player:
     def __init__(self):
         self.id = None
-        self.y = 0
-        self.speed = 3
+        self.y = None
+        self.speed = None
 
     def draw(self):
-        if self.id is not None:
-            canvas.move(self.id, 0, self.y)
-            _, y, _, y1 = canvas.coords(self.id)
-            if y <= 0 or y1 >= 600:
-                self.y = 0
+        canvas.move(self.id, 0, self.y)
+        _, y, _, y1 = canvas.coords(self.id)
+        if y <= 0 or y1 >= 600:
+            self.y = 0
 
 
 class Player1(Player):
     def __init__(self):
         super().__init__()
-        self.id = canvas.create_rectangle(30, 10, 20, 90, fill='white')
+        self.id = canvas.create_rectangle(30, 110, 40, 190, fill="white")
+        self.y = 0
+        self.speed = 3
 
     def move(self, event):
-        if event.keysym == 'w':
+        if event.keysym == "w":
             self.y = -self.speed
-        if event.keysym == 's':
+        if event.keysym == "s":
             self.y = self.speed
 
     def stop(self, event):
-        if event.keysym in ("w", "s"):
+        if event.keysym in "ws":
             self.y = 0
 
 
 class Player2(Player):
     def __init__(self):
         super().__init__()
-        self.id = canvas.create_rectangle(760, 10, 770, 90, fill="white")
+        self.id = canvas.create_rectangle(760, 210, 770, 290, fill="white")
+        self.y = 0
+        self.speed = 3
 
     def move(self, event):
-        if event.keysym == 'Up':
+        if event.keysym == "Up":
             self.y = -self.speed
-        if event.keysym == 'Down':
+        if event.keysym == "Down":
             self.y = self.speed
 
     def stop(self, event):
@@ -56,92 +79,103 @@ class Player2(Player):
 
 class Ball:
     def __init__(self):
-        self.id = canvas.create_oval(40, 20, 70, 50, fill="white")
-        self.x = 3
-        self.y = 3
+        self.id = canvas.create_oval(370, 290, 400, 320, fill="white")
+        self.x_speed = 2
+        self.y_speed = 2
 
     def draw(self):
         global score
-        canvas.move(self.id, self.x, self.y)
-        bx, by, bx1, by1 = canvas.coords(self.id)
+        canvas.move(self.id, self.x_speed, self.y_speed)
+        x1, y1, x2, y2 = canvas.coords(self.id)
 
-        if by <= 0 or by1 >= 600:
-            self.y = -self.y
-
-        x1, y1, x11, y11 = canvas.coords(player1.id)
-        x2, y2, x22, y22 = canvas.coords(player2.id)
-
-        # Отскок от первого игрока и начисление очка
-        if by <= y11 and by1 >= y1 and bx <= x11:
-            self.x = abs(self.x)
-            player1.speed += 0.25
-            self.x += 0.25 # Здесь увеличиваем скорость
+        # Проверка столкновения с левой ракеткой
+        if self.collides_with(player1):
+            self.x_speed = -self.x_speed + 0.25
             score += 1
-            canvas.itemconfig(score_gui, text=f"Счёт: {score}")
+            canvas.itemconfig(score_gui, text=f"Счет: {score}")
+            try:
+                playsound('pong.mp3', block=False)
+            except:
+                pass
 
-        # Отскок от второго игрока и начисление очка
-        if by <= y22 and by1 >= y2 and bx1 >= x2:
-            self.x = -abs(self.x)
-            player2.speed += 0.25
-            self.x += 0.25
+        # Проверка столкновения с правой ракеткой
+        if self.collides_with(player2):
+            self.x_speed = -self.x_speed - 0.25
             score += 1
-            canvas.itemconfig(score_gui, text=f"Счёт: {score}")
+            canvas.itemconfig(score_gui, text=f"Счет: {score}")
+            try:
+                playsound('pong.mp3', block=False)
+            except:
+                pass
 
-        # Проверка на конец игры (мяч достиг левой или правой стенки)
-        if bx <= 0 or bx1 >= 800:
+        # Проверка столкновения со стенками
+        if y1 <= 0 or y2 >= 600:
+            self.y_speed *= -1
+            try:
+                playsound('pong.mp3', block=False)
+            except:
+                pass
+
+        if x1 <= 0 or x2 >= 800:
             return True
+
         return False
 
+    # Функция проверки столкновения мяча с ракеткой
+    def collides_with(self, player):
+        p_x1, p_y1, p_x2, p_y2 = canvas.coords(player.id) # координаты ракетки
+        x1, y1, x2, y2 = canvas.coords(self.id) # координаты мяча
+        return (y1 < p_y2 and y2 > p_y1 and ((x1 <= p_x2 and x2 >= p_x1) or (x2 >= p_x1 and x1 <= p_x2)))
 
-score = 0
+# Цикл игры
+def game_loop():
+    loser = ball.draw()
+    player1.draw()
+    player2.draw()
+    if loser:
+        try:
+            # Открываем файл рекордов и проверяем, побит ли текущий рекорд
+            record_file = open("score.ini", "r+")
+            current_record = int(record_file.readline())
+            if current_record < score:
+                record_file.truncate(0)
+                record_file.seek(0)
+            record_file.write(f"{score}")
+            record_file.close()
+        except:
+            pass
+        canvas.create_text(400, 300, text="Игра окончена!", fill="white", font=("Consolas", 30))
+        return
+    root.after(10, game_loop)
 
+# При закрытии окна сохраняется текущий рекорд
+def on_closing():
+    try:
+        # Сохранение рекорда при закрытии окна
+        record_file = open("score.ini", "r+")
+        current_record = int(record_file.readline())
+        if current_record < score:
+            record_file.truncate(0)
+            record_file.seek(0)
+            record_file.write(f"{score}")
+        record_file.close()
+    except:
+        pass
+    root.destroy()
+
+
+# Создание объектов игры
 player1 = Player1()
 player2 = Player2()
 ball = Ball()
 
-root.bind_all('<KeyPress-w>', player1.move)
-root.bind_all('<KeyPress-s>', player1.move)
-root.bind_all('<KeyRelease-w>', player1.stop)
-root.bind_all('<KeyRelease-s>', player1.stop)
+# Привязка клавиш управления
+root.bind_all("<KeyPress>", player1.move)
+root.bind_all("<KeyPress>", player2.move, add="+")
+root.bind_all("<KeyRelease>", player1.stop)
+root.bind_all("<KeyRelease>", player2.stop, add="+")
 
-root.bind_all('<KeyPress-Up>', player2.move)
-root.bind_all('<KeyPress-Down>', player2.move)
-root.bind_all('<KeyRelease-Up>', player2.stop)
-root.bind_all('<KeyRelease-Down>', player2.stop)
-
-score_gui = canvas.create_text(390, 20, text="Счёт: 0", fill="white", font=("Consolas", 20))
-record_gui = canvas.create_text(390, 40, text="Рекорд: 0", fill="white", font=("Consolas", 20))
-
-# Проверка на наличие файла
-try:
-    with open("score.ini", "r") as record_file:
-        data = record_file.readline()
-        record = int(data) if data else 0
-except FileNotFoundError:
-    record = 0
-    with open("score.ini", "w") as record_file:
-        record_file.write(str(record))
-
-canvas.itemconfig(record_gui, text=f"Рекорд: {record}")
-
-
-def game_loop():
-    global score, record
-    player1.draw()
-    player2.draw()
-
-    if ball.draw():  # Если мяч коснулся левой или правой стенки
-        if score > record:
-            record = score
-            with open("score.ini", "w") as record_file:
-                record_file.write(str(record))
-            canvas.itemconfig(record_gui, text=f"Рекорд: {record}")
-        print("Игре Конец") # Это выводится в консоль
-        print(f"Ваш счёт: {score}, Рекорд: {record}")
-        return  # Завершить игру
-
-    root.after(16, game_loop)
-
-
+# Обработка закрытия окна
+root.protocol("WM_DELETE_WINDOW", on_closing)
 game_loop()
 root.mainloop()
