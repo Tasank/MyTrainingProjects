@@ -3,12 +3,11 @@
 записанных задом наперёд.
 """
 
-text = 'Мышка украла сыр со стола'
+text = 'Мышка  украла сыр со стола'
 
 
 def reverse_text_1(text):
-    list_reverse = text.split()
-    return list_reverse[::-1]
+    return text.split()[::-1]
 
 
 # Решение без использования split()
