@@ -55,7 +55,6 @@ class Enemy:
         "Великан": (200, 100),
         "Дракон": (300, 200),
         "Скелет": (50, 10),
-
     }
 
 
@@ -64,7 +63,7 @@ class Enemy:
             self.name = "👤-> Грех"
             self.hp = 500
             self.damage = 250
-            self.xp = 0
+            self.xp = self.hp * 1.5
         else:
             self.name = random.choice(list(self.races.keys()))
             self.hp = self.races[self.name][0]
@@ -139,11 +138,18 @@ def fight(victim):
 
 
 def start(heal=None):
-    if hero.lvl == 20:
+    if hero.lvl == 2:
         enemy = Enemy(is_boss=True)
         print("Ты достиг 20-го уровня и встретил Финального Босса!")
+
+    elif hero.lvl >= 21:
+        time.sleep(4)
+        print('Конец игры!\n ты выполнил свою миссию!🎆✨🎉')
+        quit()
+
     elif heal is None:
         enemy = Enemy()
+
     else:
         enemy = heal
 
@@ -165,7 +171,7 @@ def start(heal=None):
 
     # Проверка удачи, на побег героя
     else:
-        if hero.lvl >= 20:
+        if hero.lvl == 2:
             print("От босса сбежать невозможно!")
             fight(enemy)
         else:
@@ -179,8 +185,5 @@ def start(heal=None):
                 time.sleep(2)
                 enemy.attack(hero)
                 fight(enemy)
-
-
-
 
 start()
