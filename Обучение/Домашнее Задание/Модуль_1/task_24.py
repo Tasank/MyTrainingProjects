@@ -112,7 +112,7 @@ class Ball:
         if y1 <= 0 or y2 >= 600:
             self.y_speed *= -1
             try:
-                playsound('pong.mp3', block=False)
+                playsound('ping.mp3', block=False)
             except:
                 pass
 
