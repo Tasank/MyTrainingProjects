@@ -16,11 +16,7 @@ speed = 15
 screen = pygame.display.set_mode((WIDTH, HEIGHT)) # Создание окна
 pygame.display.set_caption('Шаблон') # Изменение заголовка
 
-
 clock = pygame.time.Clock()
-
-
-pygame.display.flip()
 
 run = True
 while run:
