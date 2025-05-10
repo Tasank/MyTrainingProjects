@@ -1,6 +1,18 @@
+import pygame
 
-def plus(a, b):
-    return a + b
+pygame.init()
 
-result = plus(10,1)
-print(result)
+WIDTH = 480
+HEIGHT = 360
+
+screen = pygame.display.set_mode((WIDTH,HEIGHT))
+pygame.display.set_caption('Шаблон')
+
+run = True
+while run:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+                run = False
+
+
+pygame.quit()
