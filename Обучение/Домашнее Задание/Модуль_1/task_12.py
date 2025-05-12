@@ -63,8 +63,7 @@ red.pendown()
 
 for _ in range(36):
     for _ in range(36):
-        red.forward(10)
-        red.right(10)
+        red.circle(10)
     red.right(10)
 
 

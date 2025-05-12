@@ -11,6 +11,6 @@ class MyClass:
         return f'Это вывод для разработчиков'
 
 polo = MyClass()
-polo
+
 print(polo)
 print(repr(polo))
