@@ -9,4 +9,7 @@ class Menu(pygame_menu.Menu):
         self.root = root
 
     def flip(self, events):
-        pass
+        if self.is_enabled():
+            self.update(events)
+        if self. is_enabled():
+            self.draw(self.root)
