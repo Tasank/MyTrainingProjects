@@ -69,4 +69,3 @@ while run:
 
 pygame.quit()
 
-main_menu = task_26.Menu(screen)
