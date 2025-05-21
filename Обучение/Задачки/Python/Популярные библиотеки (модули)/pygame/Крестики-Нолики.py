@@ -60,7 +60,7 @@ pygame.display.set_caption('Крестики-Нолики')
 
 # Создание меню
 main_menu = Меню.Menu(screen, theme=Меню.themes.THEME_GREEN)
-main_menu.add.selector('Выберите сторону: ', [('Крестики', True), ('Нолики', False)], onchange=set_side)
+main_menu.add.selector('Выберите сторону: ', [('Крестик', True), ('Нолик', False)], onchange=set_side)
 
 main_menu.add.button('Играть', disable)
 main_menu.add.button('Выход', pygame.quit)
