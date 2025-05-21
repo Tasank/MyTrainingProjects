@@ -49,10 +49,10 @@ def draw_symbols():
     for i in range(3):
         for j in range(3):
             if field[i][j] == 'x':
-                pygame.draw.line(screen, 'black', (j * 200 + 5, i * 200 +5), (j * 200 + 195, i * 200 + 195), 5)
-                pygame.draw.line(screen, 'black', (j * 200 + 5, i * 200 + 195), (j * 200 + 195, i * 200 + 5), 5)
+                pygame.draw.line(screen, 'black', (j * 200 + 50, i * 200 + 50), (j * 200 + 150, i * 200 + 150), 5)
+                pygame.draw.line(screen, 'black', (j * 200 + 50, i * 200 + 150), (j * 200 + 150, i * 200 + 50), 5)
             elif field[i][j] == 'o':
-                pygame.draw.circle(screen, 'black', (j * 200 + 100, i * 200 + 100), 90, 5)
+                pygame.draw.circle(screen, 'black', (j * 200 + 100, i * 200 + 100), 50, 5)
 
 # Создание окна
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
