@@ -45,6 +45,7 @@ def disable():
 
 # Функция отрисовки символов на поле
 def draw_symbols():
+    # i - строка, j - столбец
     for i in range(3):
         for j in range(3):
             if field[i][j] == 'x':
